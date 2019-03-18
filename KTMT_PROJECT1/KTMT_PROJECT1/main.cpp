@@ -12,5 +12,6 @@ void main()
 	system("pause");
 	//sdfudg
 	cout << "90475t\n";
-	cout << "asfasasd";
+	//sdfhdgg righf---123
+	cout << "dsfhsdgf\n";
 }
