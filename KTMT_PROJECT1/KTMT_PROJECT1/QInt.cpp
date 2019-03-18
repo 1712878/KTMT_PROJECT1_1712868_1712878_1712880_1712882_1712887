@@ -73,11 +73,11 @@ void Qint::PrintQintBit()
 		PrintIntBit(this->data[i]);
 	}
 }
-void Qint::ScanfQint(Qint & qint)
+void Qint::ScanQint(Qint & x)
 {
 	string str;
 	cout << "Moi Ban Nhap So Vao: ";
 	getline(cin >> ws, str);
-	SetDataDec(str);
+	x.SetDataDec(str);
 }
 

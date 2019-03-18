@@ -17,7 +17,8 @@ public:
 	// In dữ liệu dạng bit trong mảng a[4]
 	void PrintQintBit();
 	//
-	void ScanfQint(Qint &qint);
+	void ScanQint(Qint &x);
+	void PrintQInt(Qint x);
 };
 
 
