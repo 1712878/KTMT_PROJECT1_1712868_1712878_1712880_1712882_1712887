@@ -1,5 +1,30 @@
 ﻿#include "QInt.h"
 
+// "123456" + "789" = "124245"
+string AddTwoStringInt(string num1, string num2)
+{
+	// num1 = 12345    num2 = 678901
+	int len1 = num1.size(), len2 = num2.size(), len;
+	if (len1 > len2)
+		num2.insert(0, len1 - len2, '0');
+	if (len1 < len2)
+		num1.insert(0, len2 - len1, '0');
+	len = num1.size();
+	int tmp, tmp1, tmp2, flag = 0;
+	string result = "";
+	for (int i = len - 1; i >= 0; i--)
+	{
+		tmp1 = num1[i] - '0';
+		tmp2 = num2[i] - '0';
+		tmp = tmp1 + tmp2 + flag;
+		if (tmp > 9)flag = 1;
+		else flag = 0;
+		result = to_string(tmp % 10) + result;
+	}
+	if (flag == 1)
+		result = '1' + result;
+	return result;
+}
 // Chia một chuỗi dạng 10 cho 2. VD: "123"/2 = "61"
 string DivideStringForTwo(string str)
 {
