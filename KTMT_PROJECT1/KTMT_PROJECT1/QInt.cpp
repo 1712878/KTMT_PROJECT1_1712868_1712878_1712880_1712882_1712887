@@ -1,7 +1,7 @@
 ﻿#include "QInt.h"
 
 // "123456" + "789" = "124245"
-string AddTwoStringInt(string num1, string num2)
+string AddTwoIntString(string num1, string num2)
 {
 	// num1 = 12345    num2 = 678901
 	int len1 = num1.size(), len2 = num2.size(), len;
