@@ -1,4 +1,4 @@
-﻿#include "Qint.h"
+#include "Qint.h"
 
 void main()
 {
