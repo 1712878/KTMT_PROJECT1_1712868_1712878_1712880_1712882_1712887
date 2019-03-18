@@ -73,6 +73,23 @@ void QInt::PrintQIntBit()
 		PrintIntBit(this->data[i]);
 	}
 }
+string QInt::GetDataBin()
+{
+	string ssr;
+	int len = 127;
+	ssr.resize(128);
+	bool strBin[128];
+	for (int i = 0; i <128; i++)
+	{
+		strBin[i]=GetBit(this->data[this->size - 1 - i / 32], i % 32);
+		
+	}
+	for (int i = 0; i < 128; i++)
+	{
+		ssr[len-i] = strBin[i] + '0';
+	}
+	return ssr;
+}
 void QInt::ScanQInt(QInt & x)
 {
 	string str;
@@ -83,6 +100,7 @@ void QInt::ScanQInt(QInt & x)
 
 void QInt::PrintQInt(QInt x)
 {
+
 }
 
 bool * QInt::DecToBin(QInt x)
