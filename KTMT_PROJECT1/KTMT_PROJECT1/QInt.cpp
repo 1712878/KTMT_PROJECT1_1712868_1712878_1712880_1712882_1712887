@@ -42,7 +42,10 @@ string ConvertBigIntToBin(string str)
 	}
 	return bin;
 }
-
+int TraVeInt()
+{
+	return 1;
+}
 QInt::QInt()
 {
 	for (int i = 0; i < this->size; i++)
