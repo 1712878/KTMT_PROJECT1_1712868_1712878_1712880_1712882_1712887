@@ -1,4 +1,4 @@
-﻿#include "Qint.h"
+﻿#include "QInt.h"
 
 // Chia một chuỗi dạng 10 cho 2. VD: "123"/2 = "61"
 string DivideStringForTwo(string str)
@@ -43,13 +43,13 @@ string ConvertBigIntToBin(string str)
 	return bin;
 }
 
-Qint::Qint()
+QInt::QInt()
 {
 	for (int i = 0; i < this->size; i++)
 		this->data[i] = 0;
 }
 
-void Qint::SetDataBin(string strBin)
+void QInt::SetDataBin(string strBin)
 {
 	int len = strBin.length();
 	for (int i = 0; i < 128; i++)
@@ -60,24 +60,28 @@ void Qint::SetDataBin(string strBin)
 	}
 }
 
-void Qint::SetDataDec(string strDec)
+void QInt::SetDataDec(string strDec)
 {
 	string bin = ConvertBigIntToBin(strDec);
 	this->SetDataBin(bin);
 }
 
-void Qint::PrintQintBit()
+void QInt::PrintQIntBit()
 {
 	for (int i = 0; i < this->size; i++)
 	{
 		PrintIntBit(this->data[i]);
 	}
 }
-void Qint::ScanQint(Qint & x)
+void QInt::ScanQInt(QInt & x)
 {
 	string str;
 	cout << "Moi Ban Nhap So Vao: ";
 	getline(cin >> ws, str);
 	x.SetDataDec(str);
+}
+
+void QInt::PrintQInt(QInt x)
+{
 }
 
