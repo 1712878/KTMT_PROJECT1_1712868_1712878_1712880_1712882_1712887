@@ -12,4 +12,5 @@ void main()
 	system("pause");
 	//sdfudg
 	cout << "90475t\n";
+	cout << "asfasasd";
 }
