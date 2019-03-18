@@ -1,4 +1,4 @@
-#include "Qint.h"
+﻿#include "Qint.h"
 
 void main()
 {
@@ -7,4 +7,5 @@ void main()
 	a.SetDataDec(s);
 	a.PrintQIntBit();
 	system("pause");
+	//tùng óc chó
 }
