@@ -7,5 +7,6 @@ void main()
 	a.SetDataDec(s);
 	a.PrintQIntBit();
 	cout << "hello!";
+	cout << "world";
 	system("pause");
 }
