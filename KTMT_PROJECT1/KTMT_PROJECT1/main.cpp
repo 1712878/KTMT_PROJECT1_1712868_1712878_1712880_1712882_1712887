@@ -10,8 +10,6 @@ void main()
 	cout << "hello!";
 	cout << "world3456458";
 	system("pause");
-	//sdfudg
-	cout << "90475t\n";
-	//sdfhdgg righf---123
-	cout << "dsfhsdgf\n";
+	//Dong 1 - Tuan
+	//Dong 2- Tuan
 }
