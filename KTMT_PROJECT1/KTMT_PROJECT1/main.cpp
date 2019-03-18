@@ -9,4 +9,6 @@ void main()
 	cout << "hello!";
 	cout << "world3456458";
 	system("pause");
+	//sdfudg
+	cout << "90475t\n";
 }
