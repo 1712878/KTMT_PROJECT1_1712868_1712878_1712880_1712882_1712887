@@ -6,5 +6,8 @@ void main()
 	string s = "238914365438435789436554346";
 	a.SetDataDec(s);
 	a.PrintQIntBit();
+	cout << endl;
+	string c = a.GetDataBin();
+	cout << c;
 	system("pause");
 }

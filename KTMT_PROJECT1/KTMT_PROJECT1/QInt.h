@@ -16,7 +16,9 @@ public:
 	void SetDataDec(string strDec);
 	// In dữ liệu dạng bit trong mảng a[4]
 	void PrintQIntBit();
-	//
+	//Lấy Bit từ data
+	string GetDataBin();
+
 	void ScanQInt(QInt &x);
 	void PrintQInt(QInt x);
 };
