@@ -19,6 +19,32 @@ public:
 	//
 	void ScanQInt(QInt &x);
 	void PrintQInt(QInt x);
+	bool * DecToBin(QInt x);
+	QInt BinToDec(bool *bit);
+	char *BinToHex(bool *bit);
+	char *DecToHex(QInt x);
+
+	QInt operator + (const QInt& obj);
+	QInt operator - (const QInt& obj);
+	QInt operator * (const QInt& obj);
+	QInt operator / (const QInt& obj);
+
+	bool operator < (const QInt& obj);
+	bool operator > (const QInt& obj);
+	bool operator == (const QInt& obj);
+	bool operator <= (const QInt& obj);
+	bool operator >= (const QInt& obj);
+	bool operator = (const QInt& obj);
+
+	bool operator & (const QInt& obj);
+	bool operator | (const QInt& obj);
+	bool operator ^ (const QInt& obj);
+	//bool operator ~ (const QInt& obj);
+
+	QInt operator << (const QInt& obj);
+	QInt operator >> (const QInt& obj);
+	//QInt operator rol (const QInt& obj);
+	//QInt operator ror (const QInt& obj);
 };
 
 

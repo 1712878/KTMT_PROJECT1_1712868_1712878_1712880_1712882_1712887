@@ -85,3 +85,111 @@ void QInt::PrintQInt(QInt x)
 {
 }
 
+bool * QInt::DecToBin(QInt x)
+{
+	return nullptr;
+}
+
+QInt QInt::BinToDec(bool * bit)
+{
+	return QInt();
+}
+
+char * QInt::BinToHex(bool * bit)
+{
+	return nullptr;
+}
+
+char * QInt::DecToHex(QInt x)
+{
+	return nullptr;
+}
+
+QInt QInt::operator+(const QInt & obj)
+{
+	return QInt();
+}
+
+QInt QInt::operator-(const QInt & obj)
+{
+	return QInt();
+}
+
+QInt QInt::operator*(const QInt & obj)
+{
+	return QInt();
+}
+
+QInt QInt::operator/(const QInt & obj)
+{
+	return QInt();
+}
+
+bool QInt::operator<(const QInt & obj)
+{
+	return false;
+}
+
+bool QInt::operator>(const QInt & obj)
+{
+	return false;
+}
+
+bool QInt::operator==(const QInt & obj)
+{
+	return false;
+}
+
+bool QInt::operator<=(const QInt & obj)
+{
+	return false;
+}
+
+bool QInt::operator>=(const QInt & obj)
+{
+	return false;
+}
+
+bool QInt::operator=(const QInt & obj)
+{
+	return false;
+}
+
+bool QInt::operator&(const QInt & obj)
+{
+	return false;
+}
+
+bool QInt::operator|(const QInt & obj)
+{
+	return false;
+}
+
+bool QInt::operator^(const QInt & obj)
+{
+	return false;
+}
+
+//bool QInt::operator~(const QInt & obj)
+//{
+//	return false;
+//}
+
+QInt QInt::operator<<(const QInt & obj)
+{
+	return QInt();
+}
+
+QInt QInt::operator>>(const QInt & obj)
+{
+	return QInt();
+}
+
+//QInt::operator rol(const QInt & obj)
+//{
+//}
+
+//QInt::operator ror(const QInt & obj)
+//{
+//}
+
