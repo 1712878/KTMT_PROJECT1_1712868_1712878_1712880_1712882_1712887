@@ -115,6 +115,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bit.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="QInt.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Bit.h" />
+    <ClInclude Include="QInt.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
