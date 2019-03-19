@@ -65,6 +65,9 @@ string ConvertBigIntToBin(string str)
 		tmp = DivideStringForTwo(tmp);
 		len = tmp.size();
 	}
+	int l = bin.length();
+	if (l < 128)
+		bin.insert(0, 128 - l, '0');
 	return bin;
 }
 
@@ -87,7 +90,7 @@ void QInt::SetDataBin(string strBin)
 
 void QInt::SetDataDec(string strDec)
 {
-	string bin = ConvertBigIntToBin(strDec);
+	string bin = this->DecToBin(strDec);
 	this->SetDataBin(bin);
 }
 
@@ -184,21 +187,76 @@ string PowHex(int exp)
 {
 	return Multiply(PowOneDigit(4, exp), PowOneDigit(4, exp));
 }
-
+//
+void NotBit(char &bit)
+{
+	if (bit == '0')
+		bit = '1';
+	else
+		bit = '0';
+}
+// Bù 2
+string TwoComplement(string &str)
+{
+	int len = str.length();
+	if (len < 128)
+		str.insert(0, 128 - len, '0');
+	int pos = 128 - 1;
+	while (str[pos] != '1')
+		pos--;
+	for (int i = 0; i < pos; i++)
+		NotBit(str[i]);
+	return str;
+}
+// Không dấu
+string NotSign(string &str)
+{
+	int pos = str.find_last_of('1');
+	for (int i = 0; i < pos; i++)
+		NotBit(str[i]);
+	return str;
+}
 // END
 void QInt::PrintQInt()
 {
-	
+	string temp = this->GetDataBin();
+	cout << this->BinToDec(temp);
 }
 
 string QInt::DecToBin(string str)
 {
-	return string();
+	string result;
+	bool minus = false;
+	if (str[0] == '-')
+	{
+		minus = true;
+		str.erase(str.begin());
+	}
+	result = ConvertBigIntToBin(str);
+	if (minus)
+		TwoComplement(result);
+	return result;
 }
 
 string QInt::BinToDec(string bit)
 {
-	return string();
+	string result = "";
+	bool minus = false;
+	if (bit[0] == '1')
+	{
+		minus = true;
+		NotSign(bit);
+	}
+	bit.erase(bit.begin());
+	int len = bit.length();
+	for (int i = len - 1; i >= 0; i--)
+	{
+		if(bit[i] == '1')
+			result = AddTwoIntString(result, PowTwo(len - i - 1));
+	}
+	if (minus)
+		result.insert(0, 1, '-');
+	return result;
 }
 
 string QInt::BinToHex(string bit)
