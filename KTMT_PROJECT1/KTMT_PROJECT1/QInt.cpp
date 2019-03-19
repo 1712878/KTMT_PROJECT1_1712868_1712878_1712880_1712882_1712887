@@ -339,6 +339,7 @@ bool QInt::operator^(const QInt & obj)
 //	return false;
 //}
 
+//Dịch trái
 QInt operator<<(QInt obj,int SoBitDich)
 {
 	QInt des;
@@ -356,6 +357,7 @@ QInt operator<<(QInt obj,int SoBitDich)
 	return des;
 }
 
+//Dịch phải
 QInt operator>>(QInt obj, int SoBitDich)
 {
 	QInt des;
