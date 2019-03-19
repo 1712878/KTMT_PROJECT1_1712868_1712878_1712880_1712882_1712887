@@ -115,12 +115,12 @@ string QInt::GetDataBin()
 	}
 	return ssr;
 }
-void QInt::ScanQInt(QInt & x)
+void QInt::ScanQInt()
 {
 	string str;
 	cout << "Moi Ban Nhap So Vao: ";
 	getline(cin >> ws, str);
-	x.SetDataDec(str);
+	this->SetDataDec(str);
 }
 // BEGIN
 
@@ -186,29 +186,29 @@ string PowHex(int exp)
 }
 
 // END
-void QInt::PrintQInt(QInt x)
+void QInt::PrintQInt()
 {
 	
 }
 
-bool * QInt::DecToBin(QInt x)
+string QInt::DecToBin(string str)
 {
-	return nullptr;
+	return string();
 }
 
-QInt QInt::BinToDec(bool * bit)
+string QInt::BinToDec(string bit)
 {
-	return QInt();
+	return string();
 }
 
-char * QInt::BinToHex(bool * bit)
+string QInt::BinToHex(string bit)
 {
-	return nullptr;
+	return string();
 }
 
-char * QInt::DecToHex(QInt x)
+string QInt::DecToHex(string str)
 {
-	return nullptr;
+	return string();
 }
 
 QInt QInt::operator+(const QInt & obj)

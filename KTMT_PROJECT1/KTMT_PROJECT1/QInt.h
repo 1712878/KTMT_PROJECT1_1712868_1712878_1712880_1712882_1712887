@@ -19,12 +19,12 @@ public:
 	//Lấy Bit từ data
 	string GetDataBin();
 
-	void ScanQInt(QInt &x);
-	void PrintQInt(QInt x);
-	bool * DecToBin(QInt x);
-	QInt BinToDec(bool *bit);
-	char *BinToHex(bool *bit);
-	char *DecToHex(QInt x);
+	void ScanQInt();
+	void PrintQInt();
+	string DecToBin(string str);
+	string BinToDec(string bit);
+	string BinToHex(string bit);
+	string DecToHex(string str);
 
 	QInt operator + (const QInt& obj);
 	QInt operator - (const QInt& obj);
