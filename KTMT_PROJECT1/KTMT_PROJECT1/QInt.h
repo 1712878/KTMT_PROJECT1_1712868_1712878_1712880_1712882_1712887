@@ -43,8 +43,8 @@ public:
 	bool operator ^ (const QInt& obj);
 	//bool operator ~ (const QInt& obj);
 
-	QInt operator << (const QInt& obj);
-	QInt operator >> (const QInt& obj);
+	friend QInt operator << (QInt obj,int SoBitDich);
+	friend QInt operator >> (QInt obj,int soBitDich);
 	//QInt operator rol (const QInt& obj);
 	//QInt operator ror (const QInt& obj);
 };

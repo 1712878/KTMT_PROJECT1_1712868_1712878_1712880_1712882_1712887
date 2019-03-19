@@ -281,14 +281,39 @@ bool QInt::operator^(const QInt & obj)
 //	return false;
 //}
 
-QInt QInt::operator<<(const QInt & obj)
+QInt operator<<(QInt obj,int SoBitDich)
 {
-	return QInt();
+	QInt des;
+	string str;
+	str = obj.GetDataBin();
+	for (int i = 0; i < str.size() - SoBitDich; i++)
+	{
+		str.at(i) = str.at(i + SoBitDich);
+	}
+	for (int i = str.size() - SoBitDich; i < str.size(); i++)
+	{
+		str.at(i) = '0';
+	}
+	des.SetDataBin(str);
+	return des;
 }
 
-QInt QInt::operator>>(const QInt & obj)
+QInt operator>>(QInt obj, int SoBitDich)
 {
-	return QInt();
+	QInt des;
+	string str;
+	char MSB = obj.GetDataBin().at(0);
+	str = obj.GetDataBin();
+	for (int i = str.size() - 1; i > SoBitDich-1; i--)
+	{
+		str.at(i) = str.at(i-2);
+	}
+	for (int i = 0; i < SoBitDich; i++)
+	{
+		str.at(i) = MSB;
+	}
+	des.SetDataBin(str);
+	return des;
 }
 
 //QInt::operator rol(const QInt & obj)
