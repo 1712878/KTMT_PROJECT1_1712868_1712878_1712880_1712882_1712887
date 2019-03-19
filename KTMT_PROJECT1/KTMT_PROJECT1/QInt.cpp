@@ -211,10 +211,26 @@ string TwoComplement(string &str)
 // Không dấu
 string NotSign(string &str)
 {
+	int len = str.length();
+	if (len < 128)
+		str.insert(0, 128 - len, '0');
 	int pos = str.find_last_of('1');
 	for (int i = 0; i < pos; i++)
 		NotBit(str[i]);
 	return str;
+}
+//
+char ConVertBinToHex(string str)
+{
+	char temp1[] = { '0','1','2','3','4','5','6','7',
+					'8','9','A','B','C','D','E','F' };
+	string temp2[] = { "0000","0001","0010","0011","0100","0101","0110",
+		"0111","1000","1001","1010","1011","1100","1101","1110","1111" };
+	int size = sizeof(temp1) / sizeof(char);
+	for (int i = 0; i < size; i++)
+		if (str == temp2[i])
+			return temp1[i];
+	return '0';
 }
 // END
 void QInt::PrintQInt()
@@ -261,12 +277,34 @@ string QInt::BinToDec(string bit)
 
 string QInt::BinToHex(string bit)
 {
-	return string();
+	string result = "";
+	bool minus = false;
+	if (bit[0] == '1')
+	{
+		minus = true;
+		NotSign(bit);
+	}
+	int len = bit.length();
+	string temp;
+	while (len > 0)
+	{
+		temp.append(bit,len - 4, 4);
+		result.insert(0, 1, ConVertBinToHex(temp));
+		len -= 4;
+		temp = "";
+		bit.resize(len);
+	}
+	if (minus)
+		result.insert(0, 1, '-');
+	return result;
 }
 
 string QInt::DecToHex(string str)
 {
-	return string();
+	string result;
+	result = this->DecToBin(str);
+	result = this->BinToHex(result);
+	return result;
 }
 
 QInt QInt::operator+(const QInt & obj)
