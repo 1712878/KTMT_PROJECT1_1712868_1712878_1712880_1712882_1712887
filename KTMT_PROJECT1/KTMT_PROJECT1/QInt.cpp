@@ -101,7 +101,7 @@ void QInt::PrintQIntBit()
 		PrintIntBit(this->data[i]);
 	}
 }
-string QInt::GetDataBin()
+string QInt::GetDataBin() const
 {
 	string ssr;
 	int len = 127;

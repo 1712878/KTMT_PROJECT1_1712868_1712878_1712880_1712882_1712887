@@ -17,7 +17,7 @@ public:
 	// In dữ liệu dạng bit trong mảng a[4]
 	void PrintQIntBit();
 	//Lấy Bit từ data
-	string GetDataBin();
+	string GetDataBin() const;
 
 	void ScanQInt();
 	void PrintQInt();
@@ -31,7 +31,6 @@ public:
 	QInt operator * (const QInt& obj);
 	QInt operator / (const QInt& obj);
 
-	string GetDataBin() const;
 	bool operator < (const QInt& obj);
 	bool operator > (const QInt& obj);
 	bool operator == (const QInt& obj);
