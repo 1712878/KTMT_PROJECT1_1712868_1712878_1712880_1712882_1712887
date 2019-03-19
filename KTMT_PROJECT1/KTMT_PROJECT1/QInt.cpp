@@ -291,47 +291,182 @@ QInt QInt::operator/(const QInt & obj)
 
 bool QInt::operator<(const QInt & obj)
 {
+	int len = 127;
+	int ThisD = GetBit(this->data[0], 31);
+	int ObjD = GetBit(obj.data[0], 31);
+	if (ThisD < ObjD)
+		return false;
+	if (ThisD > ObjD)
+		return true;
+	for (int i = 1; i < 128; i++)
+	{
+		int GetThis = GetBit(this->data[i / 32], (len - i) % 32);
+		int GetObj = GetBit(obj.data[i / 32], (len - i) % 32);
+		if (GetThis > GetObj)
+			return false;
+		if (GetThis < GetObj)
+			return true;
+	}
 	return false;
 }
 
 bool QInt::operator>(const QInt & obj)
 {
+	int len = 127;
+	int ThisD = GetBit(this->data[0], 31);
+	int ObjD = GetBit(obj.data[0], 31);
+	if (ThisD > ObjD)
+		return false;
+	if (ThisD < ObjD)
+		return true;
+	for (int i = 1; i < 128; i++)
+	{
+		int GetThis = GetBit(this->data[i / 32], (len - i) % 32);
+		int GetObj = GetBit(obj.data[i / 32], (len - i) % 32);
+		if (GetThis < GetObj)
+			return false;
+		if (GetThis > GetObj)
+			return true;
+	}
 	return false;
 }
 
 bool QInt::operator==(const QInt & obj)
 {
-	return false;
+	for (int i = 0; i < 128; i++)
+	{
+		int GetThis = GetBit(this->data[i / 32], i % 32);
+		int GetObj = GetBit(obj.data[i / 32], i % 32);
+		if (GetThis != GetObj)
+			return false;
+	}
+	return true;
 }
 
 bool QInt::operator<=(const QInt & obj)
 {
-	return false;
+	int len = 127;
+	int ThisD = GetBit(this->data[0], 31);
+	int ObjD = GetBit(obj.data[0], 31);
+	if (ThisD < ObjD)
+		return false;
+	if (ThisD > ObjD)
+		return true;
+	for (int i = 1; i < 128; i++)
+	{
+		int GetThis = GetBit(this->data[i / 32], (len - i) % 32);
+		int GetObj = GetBit(obj.data[i / 32], (len - i) % 32);
+		if (GetThis > GetObj)
+			return false;
+		if (GetThis < GetObj)
+			return true;
+	}
+	return true;
 }
 
 bool QInt::operator>=(const QInt & obj)
 {
-	return false;
+	int len = 127;
+	int ThisD = GetBit(this->data[0], 31);
+	int ObjD = GetBit(obj.data[0], 31);
+	if (ThisD > ObjD)
+		return false;
+	if (ThisD < ObjD)
+		return true;
+	for (int i = 1; i < 128; i++)
+	{
+		int GetThis = GetBit(this->data[i / 32], (len - i) % 32);
+		int GetObj = GetBit(obj.data[i / 32], (len - i) % 32);
+		if (GetThis < GetObj)
+			return false;
+		if (GetThis > GetObj)
+			return true;
+	}
+	return true;
 }
 
-bool QInt::operator=(const QInt & obj)
+QInt QInt::operator=(const QInt &obj)
 {
-	return false;
+	string a;
+	string temp = obj.GetDataBin();
+	this->SetDataBin(temp);
+	return*this;
 }
 
-bool QInt::operator&(const QInt & obj)
+QInt & operator&(const QInt & obj, const QInt & Kobj)
 {
-	return false;
+	QInt temp;
+	string result;
+	result.resize(128);
+	string a = obj.GetDataBin();
+	string b = Kobj.GetDataBin();
+	for (int i = 0; i < 127; i++)
+	{
+		if (a[i] == '1'&&b[i] == '1')
+		{
+			result[i] = '1';
+		}
+		else result[i] = '0';
+	}
+	temp.SetDataBin(result);
+	return temp;
 }
 
-bool QInt::operator|(const QInt & obj)
+QInt & operator|(const QInt & obj, const QInt & Kobj)
 {
-	return false;
+	QInt temp;
+	string result;
+	result.resize(128);
+	string a = obj.GetDataBin();
+	string b = Kobj.GetDataBin();
+	for (int i = 0; i < 127; i++)
+	{
+		if (a[i] == '0'&&b[i] == '0')
+		{
+			result[i] = '0';
+		}
+		else result[i] = '1';
+	}
+	temp.SetDataBin(result);
+	return temp;
 }
 
-bool QInt::operator^(const QInt & obj)
+QInt & operator^(const QInt & obj, const QInt & Kobj)
 {
-	return false;
+	QInt temp;
+	string result;
+	result.resize(128);
+	string a = obj.GetDataBin();
+	string b = Kobj.GetDataBin();
+	for (int i = 0; i < 127; i++)
+	{
+		if (a[i] == b[i])
+		{
+			result[i] = '0';
+		}
+		else result[i] = '1';
+	}
+	temp.SetDataBin(result);
+	return temp;
+}
+
+QInt & operator~(const QInt & obj)
+{
+
+	QInt temp;
+	string result;
+	result.resize(128);
+	string a = obj.GetDataBin();
+	for (int i = 0; i < 127; i++)
+	{
+		if (a[i] == '1')
+		{
+			result[i] = '0';
+		}
+		else result[i] = '1';
+	}
+	temp.SetDataBin(result);
+	return temp;
 }
 
 //bool QInt::operator~(const QInt & obj)
