@@ -90,7 +90,7 @@ void QInt::SetDataBin(string strBin)
 
 void QInt::SetDataDec(string strDec)
 {
-	string bin = ConvertBigIntToBin(strDec);
+	string bin = this->DecToBin(strDec);
 	this->SetDataBin(bin);
 }
 
