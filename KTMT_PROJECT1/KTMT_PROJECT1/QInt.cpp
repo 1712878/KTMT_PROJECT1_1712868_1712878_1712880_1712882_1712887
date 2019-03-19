@@ -122,10 +122,73 @@ void QInt::ScanQInt(QInt & x)
 	getline(cin >> ws, str);
 	x.SetDataDec(str);
 }
+// BEGIN
 
+// "987654321"*2="1975308642"
+string MultiplyOneDigit(string str, int factor)
+{
+	if (factor < 1 || factor > 9)
+		return "0";
+	string result = "";
+	int len = str.length();
+	int rem = 0;
+	int temp;
+	for (int i = len - 1; i >= 0; i--)
+	{
+		temp = factor * (str[i] - '0') + rem;
+		rem = 0;
+		if (temp >= 10)
+		{
+			rem = temp / 10;
+			temp -= rem * 10;
+		}
+		result.insert(0, to_string(temp));
+	}
+	if (rem)
+		result.insert(0, to_string(rem));
+	return result;
+}
+// "123456789"*"987654321"="121932631112635269"
+string Multiply(string num1, string num2)
+{
+	string result = "";
+	int len = num2.length();
+	int factor;
+	string temp;
+	for (int i = len - 1; i >= 0; i--)
+	{
+		factor = num2[i] - '0';
+		temp = MultiplyOneDigit(num1, factor);
+		temp.insert(temp.length(), len - i - 1, '0');
+		result = AddTwoIntString(result, temp);
+	}
+	return result;
+}
+// 2^127 = "170141183460469231731687303715884105728"
+string PowOneDigit(int factor, int exp)
+{
+	if (exp == 0)
+		return "1";
+	string result = to_string(factor);
+	while (--exp)
+		result = MultiplyOneDigit(result, factor);
+	return result;
+}
+// 2^127 = "170141183460469231731687303715884105728"
+string PowTwo(int exp)
+{
+	return PowOneDigit(2, exp);
+}
+// 16^10 = 1099511627776
+string PowHex(int exp)
+{
+	return Multiply(PowOneDigit(4, exp), PowOneDigit(4, exp));
+}
+
+// END
 void QInt::PrintQInt(QInt x)
 {
-
+	
 }
 
 bool * QInt::DecToBin(QInt x)
