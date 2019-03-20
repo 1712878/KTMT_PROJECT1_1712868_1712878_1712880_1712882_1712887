@@ -195,32 +195,31 @@ void NotBit(char &bit)
 	else
 		bit = '0';
 }
-// Bù 2
-string TwoComplement(string &str)
+//
+string AddBitZero(string &bin)
 {
-	int len = str.length();
+	int len = bin.length();
 	if (len < 128)
-		str.insert(0, 128 - len, '0');
-	int pos = 128 - 1;
-	while (str[pos] != '1')
-		pos--;
-	for (int i = 0; i < pos; i++)
-		NotBit(str[i]);
-	return str;
+		bin.insert(0, 128 - len, '0');
+	return bin;
 }
 // Không dấu
 string NotSign(string &str)
 {
-	int len = str.length();
-	if (len < 128)
-		str.insert(0, 128 - len, '0');
 	int pos = str.find_last_of('1');
 	for (int i = 0; i < pos; i++)
 		NotBit(str[i]);
 	return str;
 }
+// Bù 2
+string TwoComplement(string &str)
+{
+	AddBitZero(str);
+	NotSign(str);
+	return str;
+}
 //
-char ConVertBinToHex(string str)
+char ConvertBinToHex(string str)
 {
 	char temp1[] = { '0','1','2','3','4','5','6','7',
 					'8','9','A','B','C','D','E','F' };
@@ -256,6 +255,7 @@ string QInt::DecToBin(string str)
 
 string QInt::BinToDec(string bit)
 {
+	AddBitZero(bit);
 	string result = "";
 	bool minus = false;
 	if (bit[0] == '1')
@@ -277,6 +277,7 @@ string QInt::BinToDec(string bit)
 
 string QInt::BinToHex(string bit)
 {
+	AddBitZero(bit);
 	string result = "";
 	bool minus = false;
 	if (bit[0] == '1')
@@ -289,7 +290,7 @@ string QInt::BinToHex(string bit)
 	while (len > 0)
 	{
 		temp.append(bit,len - 4, 4);
-		result.insert(0, 1, ConVertBinToHex(temp));
+		result.insert(0, 1, ConvertBinToHex(temp));
 		len -= 4;
 		temp = "";
 		bit.resize(len);
