@@ -309,12 +309,35 @@ string QInt::DecToHex(string str)
 
 QInt QInt::operator+(const QInt & obj)
 {
-	return QInt();
+	int rem = 0, i = 127;  // phàn tử nằm ở cuối mảng 0 -> 127
+	int n = 32;					//  Số bit mà kiểu int lưu trữ
+	QInt result;
+	while (i >= 0)
+	{
+		rem += GetBit(this->data[i / n], n - i % n - 1) + GetBit(obj.data[i / n], n - i % n - 1);
+		if (rem % 2 == 1)
+			SetBit(result.data[i / n], n - i % n - 1);
+
+		rem /= 2;       //  Lấy bit nhớ
+		i--;
+	}
+	return QInt(result);
 }
 
 QInt QInt::operator-(const QInt & obj)
 {
-	return QInt();
+	int rem = 0, i = 127;		// phàn tử nằm ở cuối mảng 0 -> 127
+	int n = 32;						//  Số bit mà kiểu int lưu trữ
+	QInt result;
+	while (i >= 0)
+	{
+		rem = GetBit(this->data[i / n], n - i % n - 1) - GetBit(obj.data[i / n], n - i % n - 1) - rem;
+		if (abs(rem) % 2 == 1)
+			SetBit(result.data[i / n], n - i % n - 1);
+
+		i--;
+	}
+	return QInt(result);
 }
 
 QInt QInt::operator*(const QInt & obj)
