@@ -45,8 +45,8 @@ public:
 
 	friend QInt operator << (QInt obj,int SoBitDich);
 	friend QInt operator >> (QInt obj,int soBitDich);
-	//QInt operator rol (const QInt& obj);
-	//QInt operator ror (const QInt& obj);
+	QInt rol(int SoBitQuay);
+	QInt ror(int SoBitQuay);
 };
 
 

@@ -563,7 +563,7 @@ QInt operator>>(QInt obj, int SoBitDich)
 	str = obj.GetDataBin();
 	for (int i = str.size() - 1; i > SoBitDich-1; i--)
 	{
-		str.at(i) = str.at(i-2);
+		str.at(i) = str.at(i-SoBitDich);
 	}
 	for (int i = 0; i < SoBitDich; i++)
 	{
@@ -573,11 +573,53 @@ QInt operator>>(QInt obj, int SoBitDich)
 	return des;
 }
 
-//QInt::operator rol(const QInt & obj)
-//{
-//}
+//Quay trái
+QInt QInt::rol(int SoBitQuay)
+{
+	char* BitChuyenRa = new char[SoBitQuay];
+	QInt des;
+	string str;
+	str = this->GetDataBin();
+	for (int i = 0, j = SoBitQuay; i < SoBitQuay; i++)
+	{
+		BitChuyenRa[i] = str.at(j-1);
+		j--;
+	}
+	for (int i = 0; i < str.size() - SoBitQuay; i++)
+	{
+		str.at(i) = str.at(i + SoBitQuay);
+	}
+	for (int i = 0; i < SoBitQuay; i++)
+	{
+		str.at(str.size() - SoBitQuay + i) = BitChuyenRa[i];
+	}
+	des.SetDataBin(str);
+	delete[] BitChuyenRa;
+	return des;
+}
 
-//QInt::operator ror(const QInt & obj)
-//{
-//}
+//Quay phải
+QInt QInt::ror(int SoBitQuay)
+{
+	char* BitChuyenRa = new char[SoBitQuay];
+	QInt des;
+	string str;
+	str = this->GetDataBin();
+	for (int i = 0, j = str.size(); i < SoBitQuay; i++)
+	{
+		BitChuyenRa[i] = str.at(j-1);
+		j--;
+	}
+	for (int i = str.size() - 1; i > SoBitQuay - 1; i--)
+	{
+		str.at(i) = str.at(i - SoBitQuay);
+	}
+	for (int i = 0; i < SoBitQuay; i++)
+	{
+		str.at(i) = BitChuyenRa[i];
+	}
+	des.SetDataBin(str);
+	delete[] BitChuyenRa;
+	return des;
+}
 
