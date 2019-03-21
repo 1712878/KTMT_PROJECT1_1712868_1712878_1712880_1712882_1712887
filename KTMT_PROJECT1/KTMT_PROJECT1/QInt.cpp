@@ -354,8 +354,10 @@ QInt operator*(QInt a, QInt b)
 	for (int i = 127; i >= 0; i--)
 	{
 		if (GetBit(b.data[i / 32], n - i % n - 1) == 1)
+		{
 			tmp = a << (127 - i);
-		result = result + tmp;
+			result = result + tmp;
+		}
 	}
 	return QInt(result);
 }
