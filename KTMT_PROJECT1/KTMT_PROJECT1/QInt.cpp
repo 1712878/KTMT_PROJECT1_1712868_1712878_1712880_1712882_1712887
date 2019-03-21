@@ -333,10 +333,7 @@ QInt QInt::TwoComplementQInt()
 	QInt tmp;
 	for (int i = 127; i >= 0; i--)
 	{
-		if (GetBit(this->data[i / n], n - i % n - 1) == 1)
-			SetBitZero(this->data[i / n], n - i % n - 1);
-		else
-			SetBitOne(this->data[i / n], n - i % n - 1);
+		FlipBit(this->data[i / n], n - i % n - 1);
 	}
 	SetBitOne(tmp.data[3], 0);
 	*this = *this + tmp;

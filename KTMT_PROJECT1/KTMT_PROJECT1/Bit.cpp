@@ -17,6 +17,12 @@ unsigned int SetBitZero(unsigned int & x, int pos)
 	return x;
 }
 
+unsigned int FlipBit(unsigned int &x, int pos)
+{
+	x = (1 << pos) ^ x;
+	return x;
+}
+
 void PrintIntBit(unsigned int x)
 {
 	bool a[32];
