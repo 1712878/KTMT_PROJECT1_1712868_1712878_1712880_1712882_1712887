@@ -364,32 +364,65 @@ QInt operator*(QInt a, QInt b)
 
 QInt operator/(QInt a, QInt b)
 {
-	QInt A, Q = a, M = b;
-	if (Q < A)
+	QInt A, Q = a, M = b, tmp;
+	int k = 128, storeBit, sign = 0, signNumQ, signNumM;
+	//  Xét dấu đầu vào 
+	signNumQ = GetBit(Q.data[0], 31);
+	signNumM = GetBit(M.data[0], 31);
+	// Lấy bit đầu để kiểm tra dấu => lấy abs() & dấu của thương
+	if (signNumQ == 1 && signNumM == 0)
 	{
-		for (int i = 127; i >= 0; i++)
+
+		Q.TwoComplementQInt();
+		sign = 1;
+	}
+	else if (signNumQ == 0 && signNumM == 1)
+	{
+
+		M.TwoComplementQInt();
+		sign = 1;
+	}
+	else if (signNumQ == 1 && signNumM == 1)
+	{
+		Q.TwoComplementQInt();
+		M.TwoComplementQInt();
+		sign = 0;
+	}
+	else
+		sign = 0;
+	
+
+	if (Q < tmp)
+	{
+		for (int i = k - 1; i >= 0; i--)
 			SetBitOne(A.data[i / 32], 32 - i % 32 - 1);
 	}
-	int k = 128, Q0;
+	
 	while (k > 0)
 	{
 		A = A << 1;
-		Q0 = GetBit(Q.data[0], 31);
-		if (Q0 == 1)
+		storeBit = GetBit(Q.data[0], 31);
+		if (storeBit == 1)
 			SetBitOne(A.data[3], 0);
 		else
 			SetBitZero(A.data[3], 0);
 		Q = Q << 1;
+
 		A = A - M;
-		if (GetBit(A.data[0], 31) == 1)
+		if (A < tmp )
 		{
 			SetBitZero(Q.data[3], 0);
 			A = A + M;
 		}
 		else
 			SetBitOne(Q.data[3], 0);
+
 		k = k - 1;
 	}
+	// Đổi dấu của thương đk sign = 1
+	if (sign == 1)
+		Q.TwoComplementQInt();
+
 	return QInt(Q);
 }
 
