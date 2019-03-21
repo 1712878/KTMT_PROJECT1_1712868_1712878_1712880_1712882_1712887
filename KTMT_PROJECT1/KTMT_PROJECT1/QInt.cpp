@@ -365,12 +365,17 @@ QInt operator*(QInt a, QInt b)
 QInt operator/(QInt a, QInt b)
 {
 	QInt A, Q = a, M = b;
-	int k = 127, lastBit;
+	if (Q < A)
+	{
+		for (int i = 127; i >= 0; i++)
+			SetBitOne(A.data[i / 32], 32 - i % 32 - 1);
+	}
+	int k = 128, Q0;
 	while (k > 0)
 	{
 		A = A << 1;
-		lastBit = GetBit(Q.data[0], 31);
-		if (lastBit == 1)
+		Q0 = GetBit(Q.data[0], 31);
+		if (Q0 == 1)
 			SetBitOne(A.data[3], 0);
 		else
 			SetBitZero(A.data[3], 0);
