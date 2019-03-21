@@ -343,7 +343,15 @@ QInt QInt::operator-(const QInt & obj)
 
 QInt QInt::operator*(const QInt & obj)
 {
-	return QInt();
+	QInt tmp, result, factor = *this;
+	int n = 32;
+	for (int i = 127; i >= 0; i--)
+	{
+		if (GetBit(obj.data[i / 32], n - i % n - 1) == 1)
+			tmp = factor << (127 - i);
+		result = result + tmp;
+	}
+	return QInt(result);
 }
 
 QInt QInt::operator/(const QInt & obj)
@@ -530,11 +538,6 @@ QInt & operator~(const QInt & obj)
 	temp.SetDataBin(result);
 	return temp;
 }
-
-//bool QInt::operator~(const QInt & obj)
-//{
-//	return false;
-//}
 
 //Dịch trái
 QInt operator<<(QInt obj,int SoBitDich)
