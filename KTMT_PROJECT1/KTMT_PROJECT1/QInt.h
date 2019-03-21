@@ -27,7 +27,7 @@ public:
 	string DecToHex(string str);
 
 	friend QInt operator + (QInt a, QInt b);
-	QInt TwoComplementQInt(QInt obj);
+	QInt TwoComplementQInt();
 	friend QInt operator - (QInt a, QInt b);
 	friend QInt operator * (QInt a, QInt b);
 	friend QInt operator / (QInt a, QInt b);

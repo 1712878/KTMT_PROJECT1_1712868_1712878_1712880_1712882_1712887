@@ -79,6 +79,8 @@ QInt::QInt()
 
 void QInt::SetDataBin(string strBin)
 {
+	for (int i = 0; i < this->size; i++)
+		this->data[i] = 0;
 	int len = strBin.length();
 	for (int i = 0; i < 128; i++)
 	{
@@ -325,13 +327,13 @@ QInt operator+(QInt a, QInt b)
 	return QInt(result);
 }
 
-QInt QInt::TwoComplementQInt(QInt obj)
+QInt QInt::TwoComplementQInt()
 {
 	int n = 32;
 	QInt tmp;
 	for (int i = 127; i >= 0; i--)
 	{
-		if (GetBit(obj.data[i / n], n - i % n - 1) == 1)
+		if (GetBit(this->data[i / n], n - i % n - 1) == 1)
 			SetBitZero(this->data[i / n], n - i % n - 1);
 		else
 			SetBitOne(this->data[i / n], n - i % n - 1);
@@ -343,7 +345,7 @@ QInt QInt::TwoComplementQInt(QInt obj)
 QInt operator-(QInt a, QInt b)
 {
 	QInt result;
-	b.TwoComplementQInt(b);
+	b.TwoComplementQInt();
 	result = a + b;
 	return QInt(result);
 }
