@@ -6,7 +6,8 @@
 using namespace std;
 
 bool GetBit(unsigned int x, int pos);
-unsigned int SetBit(unsigned int &x, int pos);
+unsigned int SetBitOne(unsigned int &x, int pos);
+unsigned int SetBitZero(unsigned int &x, int pos);
 void PrintIntBit(unsigned int x);
 
 

@@ -26,10 +26,11 @@ public:
 	string BinToHex(string bit);
 	string DecToHex(string str);
 
-	QInt operator + (const QInt& obj);
-	QInt operator - (const QInt& obj);
-	QInt operator * (const QInt& obj);
-	QInt operator / (const QInt& obj);
+	friend QInt operator + (QInt a, QInt b);
+	QInt TwoComplementQInt(QInt obj);
+	friend QInt operator - (QInt a, QInt b);
+	friend QInt operator * (QInt a, QInt b);
+	friend QInt operator / (QInt a, QInt b);
 
 	bool operator < (const QInt& obj);
 	bool operator > (const QInt& obj);

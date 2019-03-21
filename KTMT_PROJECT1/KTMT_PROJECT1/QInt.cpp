@@ -84,7 +84,7 @@ void QInt::SetDataBin(string strBin)
 	{
 		len--;
 		if (len >= 0 && strBin[len] == '1')
-			SetBit(this->data[this->size - 1 - i / 32], i % 32);
+			SetBitOne(this->data[this->size - 1 - i / 32], i % 32);
 	}
 }
 
@@ -308,16 +308,16 @@ string QInt::DecToHex(string str)
 	return result;
 }
 
-QInt QInt::operator+(const QInt & obj)
+QInt operator+(QInt a, QInt b)
 {
 	int rem = 0, i = 127;  // phàn tử nằm ở cuối mảng 0 -> 127
 	int n = 32;					//  Số bit mà kiểu int lưu trữ
 	QInt result;
 	while (i >= 0)
 	{
-		rem += GetBit(this->data[i / n], n - i % n - 1) + GetBit(obj.data[i / n], n - i % n - 1);
+		rem += GetBit(a.data[i / n], n - i % n - 1) + GetBit(b.data[i / n], n - i % n - 1);
 		if (rem % 2 == 1)
-			SetBit(result.data[i / n], n - i % n - 1);
+			SetBitOne(result.data[i / n], n - i % n - 1);
 
 		rem /= 2;       //  Lấy bit nhớ
 		i--;
@@ -325,38 +325,66 @@ QInt QInt::operator+(const QInt & obj)
 	return QInt(result);
 }
 
-QInt QInt::operator-(const QInt & obj)
+QInt QInt::TwoComplementQInt(QInt obj)
 {
-	int rem = 0, i = 127;		// phàn tử nằm ở cuối mảng 0 -> 127
-	int n = 32;						//  Số bit mà kiểu int lưu trữ
-	QInt result;
-	while (i >= 0)
+	int n = 32;
+	QInt tmp;
+	for (int i = 127; i >= 0; i--)
 	{
-		rem = GetBit(this->data[i / n], n - i % n - 1) - GetBit(obj.data[i / n], n - i % n - 1) - rem;
-		if (abs(rem) % 2 == 1)
-			SetBit(result.data[i / n], n - i % n - 1);
-
-		i--;
+		if (GetBit(obj.data[i / n], n - i % n - 1) == 1)
+			SetBitZero(this->data[i / n], n - i % n - 1);
+		else
+			SetBitOne(this->data[i / n], n - i % n - 1);
 	}
+	SetBitOne(tmp.data[3], 0);
+	*this = *this + tmp;
+	return QInt(*this);
+}
+QInt operator-(QInt a, QInt b)
+{
+	QInt result;
+	b.TwoComplementQInt(b);
+	result = a + b;
 	return QInt(result);
 }
 
-QInt QInt::operator*(const QInt & obj)
+QInt operator*(QInt a, QInt b)
 {
-	QInt tmp, result, factor = *this;
+	QInt tmp, result;
 	int n = 32;
 	for (int i = 127; i >= 0; i--)
 	{
-		if (GetBit(obj.data[i / 32], n - i % n - 1) == 1)
-			tmp = factor << (127 - i);
+		if (GetBit(b.data[i / 32], n - i % n - 1) == 1)
+			tmp = a << (127 - i);
 		result = result + tmp;
 	}
 	return QInt(result);
 }
 
-QInt QInt::operator/(const QInt & obj)
+QInt operator/(QInt a, QInt b)
 {
-	return QInt();
+	QInt A, Q = a, M = b;
+	int k = 127, lastBit;
+	while (k > 0)
+	{
+		A = A << 1;
+		lastBit = GetBit(Q.data[0], 31);
+		if (lastBit == 1)
+			SetBitOne(A.data[3], 0);
+		else
+			SetBitZero(A.data[3], 0);
+		Q = Q << 1;
+		A = A - M;
+		if (GetBit(A.data[0], 31) == 1)
+		{
+			SetBitZero(Q.data[3], 0);
+			A = A + M;
+		}
+		else
+			SetBitOne(Q.data[3], 0);
+		k = k - 1;
+	}
+	return QInt(Q);
 }
 
 bool QInt::operator<(const QInt & obj)
