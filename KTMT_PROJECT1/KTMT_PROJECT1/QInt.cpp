@@ -77,6 +77,7 @@ QInt::QInt()
 		this->data[i] = 0;
 }
 
+//lưu giá trị binary vào QInt
 void QInt::SetDataBin(string strBin)
 {
 	for (int i = 0; i < this->size; i++)
@@ -90,12 +91,14 @@ void QInt::SetDataBin(string strBin)
 	}
 }
 
+//lưu giá trị decimal vào QInt
 void QInt::SetDataDec(string strDec)
 {
 	string bin = this->DecToBin(strDec);
 	this->SetDataBin(bin);
 }
 
+//In số QInt
 void QInt::PrintQIntBit()
 {
 	for (int i = 0; i < this->size; i++)
@@ -103,6 +106,8 @@ void QInt::PrintQIntBit()
 		PrintIntBit(this->data[i]);
 	}
 }
+
+//Lấy giá trị binary của sô QInt
 string QInt::GetDataBin() const
 {
 	string ssr;
@@ -120,6 +125,8 @@ string QInt::GetDataBin() const
 	}
 	return ssr;
 }
+
+//Nhập số QInt
 void QInt::ScanQInt()
 {
 	string str;
@@ -127,7 +134,6 @@ void QInt::ScanQInt()
 	getline(cin >> ws, str);
 	this->SetDataDec(str);
 }
-// BEGIN
 
 // "987654321"*2="1975308642"
 string MultiplyOneDigit(string str, int factor)
@@ -184,10 +190,26 @@ string PowTwo(int exp)
 {
 	return PowOneDigit(2, exp);
 }
-// 16^10 = 1099511627776
+// 16^10 = "1099511627776"
 string PowHex(int exp)
 {
 	return Multiply(PowOneDigit(4, exp), PowOneDigit(4, exp));
+}
+// 2^(-15) = "0.000030517578125"
+string NegativePowTwo(int exp)
+{
+	string str = "5";							
+	for (int i = 1; i < exp; i++)
+	{										
+		str.push_back('0');												//str = "500000000000000"
+	}
+	for (int i = 1; i < exp; i++)
+	{
+		str = DivideStringForTwo(str);									//str = "30517578125"
+	}
+	str.insert(str.begin(), exp - str.size(), '0');						//str = "000030517578125"
+	str = "0." + str;													//str = "0.000030517578125"
+	return str;
 }
 //
 void NotBit(char &bit)
