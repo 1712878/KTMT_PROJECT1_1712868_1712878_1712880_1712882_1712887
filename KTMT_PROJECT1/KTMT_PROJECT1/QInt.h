@@ -16,17 +16,27 @@ public:
 	void SetDataBin(string strBin);
 	// Chuyển một chuỗi Dec -> vào mảng a[4]
 	void SetDataDec(string strDec);
-	// In dữ liệu dạng bit trong mảng a[4]
-	void PrintQIntBit();
-	//Lấy Bit từ data
+	// Chuyển một chuỗi Hex -> vào mảng a[4]
+	void SetDataHex(string strHex);
+
+	// Lấy data dạng Bin
 	string GetDataBin() const;
 
+	// Nhập số QInt dạng thập phân
 	void ScanQInt();
+	// In QInt dạng thập phân
 	void PrintQInt();
+	// In dữ liệu dạng Bin
+	void PrintQIntBin();
+	// In dữ liệu dạng Hex
+	void PrintQIntHex();
+
 	string DecToBin(string str);
 	string BinToDec(string bit);
 	string BinToHex(string bit);
 	string DecToHex(string str);
+	string HexToBin(string str);
+	string HexToDec(string str);
 
 	friend QInt operator + (QInt a, QInt b);
 	QInt TwoComplementQInt();
