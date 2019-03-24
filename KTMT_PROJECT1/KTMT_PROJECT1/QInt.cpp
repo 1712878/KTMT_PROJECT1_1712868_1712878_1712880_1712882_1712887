@@ -83,27 +83,27 @@ string QInt::DecToBin(string str)
 		minus = true;
 		str.erase(str.begin());
 	}
-	result = ConvertBigIntToBin(str);
+	result = ConvertBigIntToBin(str,128);
 	if (minus)
-		TwoComplement(result);
+		TwoComplement(result,128);
 	return result;
 }
 string QInt::BinToDec(string bit)
 {
-	AddBitZero(bit);
+	AddBitZero(bit,128);
 	string result = "";
 	bool minus = false;
 	if (bit[0] == '1')
 	{
 		minus = true;
-		TwoComplement(bit);
+		TwoComplement(bit,128);
 	}
 	bit.erase(bit.begin());
 	int len = bit.length();
 	for (int i = len - 1; i >= 0; i--)
 	{
 		if(bit[i] == '1')
-			result = AddTwoIntString(result, PowTwo(len - i - 1));
+			result = AddTwoIntString(result, PositivePowTwo(len - i - 1));
 	}
 	if (minus)
 		result.insert(0, 1, '-');
@@ -111,7 +111,7 @@ string QInt::BinToDec(string bit)
 }
 string QInt::BinToHex(string bit)
 {
-	AddBitZero(bit);
+	AddBitZero(bit,128);
 	string result = "";
 	int len = bit.length();
 	string temp;

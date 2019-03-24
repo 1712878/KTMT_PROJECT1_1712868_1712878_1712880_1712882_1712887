@@ -52,7 +52,7 @@ string DivideStringForTwo(string str)
 	return thuong;
 }
 // Chuyển từ chuỗi số nguyên lớn sang chuỗi nhị phân 
-string ConvertBigIntToBin(string str)
+string ConvertBigIntToBin(string str, int n)
 {
 	string tmp = str;
 	int len = tmp.size();
@@ -66,8 +66,8 @@ string ConvertBigIntToBin(string str)
 		len = tmp.size();
 	}
 	int l = bin.length();
-	if (l < 128)
-		bin.insert(0, 128 - l, '0');
+	if (l < n)
+		bin.insert(0, n - l, '0');
 	return bin;
 }
 // "987654321"*2="1975308642"
@@ -121,7 +121,7 @@ string PowOneDigit(int factor, int exp)
 	return result;
 }
 // 2^127 = "170141183460469231731687303715884105728"
-string PowTwo(int exp)
+string PositivePowTwo(int exp)
 {
 	return PowOneDigit(2, exp);
 }
@@ -156,17 +156,18 @@ char NotBit(char &bit)
 	return bit;
 }
 // Nếu chuỗi bin chưa đủ 128 bit, thêm các bit 0 vào cho đủ
-string AddBitZero(string &bin)
+string AddBitZero(string &bin, int n)
 {
 	int len = bin.length();
-	if (len < 128)
-		bin.insert(0, 128 - len, '0');
+	if (len < n)
+		bin.insert(0, n - len, '0');
 	return bin;
 }
+
 // Chuyển chuỗi str về dạng bù 2
-string TwoComplement(string &str)
+string TwoComplement(string &str, int n)
 {
-	AddBitZero(str);
+	AddBitZero(str,n);
 	int pos = str.find_last_of('1');
 	for (int i = 0; i < pos; i++)
 		NotBit(str[i]);
@@ -197,4 +198,51 @@ string ConvertHexToBin(char c)
 		if (c == temp1[i])
 			return temp2[i];
 	return "0000";
+}
+
+string ConvertIntPartToBin(string str)
+{
+	string result;
+	bool minus = false;
+	if (str[0] == '-')
+	{
+		minus = true;
+		str.erase(str.begin());
+	}
+	result = ConvertBigIntToBin(str, 16);
+	if (minus)
+		TwoComplement(result, 16);
+	return string(result);
+}
+
+string ConvertDecPartToBin(string str)
+{
+	string result, num = "1";
+	int len, pos, i = 0;
+	// xử lí số "0123" -> "123"
+	pos = str.find_first_not_of('0', 0);
+	str = str.substr(pos, str.length() - pos);
+
+	len = str.length();
+	num = num.insert(1, len, '0');
+	while (i < 122)
+	{
+		str = MultiplyOneDigit(str, 2);
+		if (str.length() < len + 1)
+			result.append(1, '0');
+		else
+		{
+			result.append(1, '1');
+
+			if (str == num)
+				break;
+			str.erase(0, 1);
+			pos = str.find_first_not_of('0', 0);
+			str = str.substr(pos, str.length() - pos);
+		}
+		i++;
+	}
+	if (i == 126)
+		result[125] = '1';
+	return string(result);
 }

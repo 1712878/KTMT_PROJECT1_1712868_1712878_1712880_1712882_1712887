@@ -1,23 +1,23 @@
-#ifndef __Qfloat_H_
-#define __Qfloat_H_
+#ifndef __QFloat_H_
+#define __QFloat_H_
 #include"Bit.h"
 #include"Process.h"
 #include"QInt.h"
 #include<string>
-class Qfloat
+class QFloat
 {
 private:
 	unsigned int BFloat[4];
 	int sizeF = 4;
 public:
+	QFloat();
 	string BinToDecInt(string bit);
+	string GetDataBin();
 	void SetDataBin(string strBin);
-	Qfloat BinToDec(string bit);
-	string DecToBin(Qfloat x);
-	void  ScanQfloat(Qfloat  &x);
-	void PrintQfloat(Qfloat x);
-	Qfloat();
-	~Qfloat();
+	string BinToDec(string bit);
+	string DecToBin(string x);
+	void ScanQFloat();
+	void PrintQFloat();
 };
 #endif
 
