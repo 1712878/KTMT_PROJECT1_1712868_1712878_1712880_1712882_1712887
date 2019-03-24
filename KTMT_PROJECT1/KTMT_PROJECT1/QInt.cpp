@@ -34,22 +34,13 @@ void QInt::SetDataHex(string strHex)
 }
 
 // Lấy giá trị QInt dạng Bin
-string QInt::GetDataBin() const
+string QInt::GetDataBin()
 {
-	string ssr;
-	int len = 127;
-	ssr.resize(128);
-	bool strBin[128];
+	string result;
+	result.resize(128);
 	for (int i = 0; i < 128; i++)
-	{
-		strBin[i] = GetBit(this->data[this->size - 1 - i / 32], i % 32);
-
-	}
-	for (int i = 0; i < 128; i++)
-	{
-		ssr[len - i] = strBin[i] + '0';
-	}
-	return ssr;
+		result[i] = (GetBit(this->data[i / 32], 31 - i % 32) + '0');
+	return result;
 }
 
 // Nhập số QInt dạng thập phân
@@ -273,7 +264,7 @@ QInt operator/(QInt a, QInt b)
 	return QInt(Q);
 }
 
-bool QInt::operator<(const QInt & obj)
+bool QInt::operator<(QInt obj)
 {
 	int len = 127;
 	int ThisD = GetBit(this->data[0], 31);
@@ -294,7 +285,7 @@ bool QInt::operator<(const QInt & obj)
 	return false;
 }
 
-bool QInt::operator>(const QInt & obj)
+bool QInt::operator>(QInt  obj)
 {
 	int len = 127;
 	int ThisD = GetBit(this->data[0], 31);
@@ -315,7 +306,7 @@ bool QInt::operator>(const QInt & obj)
 	return false;
 }
 
-bool QInt::operator==(const QInt & obj)
+bool QInt::operator==(QInt obj)
 {
 	for (int i = 0; i < 128; i++)
 	{
@@ -327,7 +318,7 @@ bool QInt::operator==(const QInt & obj)
 	return true;
 }
 
-bool QInt::operator<=(const QInt & obj)
+bool QInt::operator<=(QInt obj)
 {
 	int len = 127;
 	int ThisD = GetBit(this->data[0], 31);
@@ -348,7 +339,7 @@ bool QInt::operator<=(const QInt & obj)
 	return true;
 }
 
-bool QInt::operator>=(const QInt & obj)
+bool QInt::operator>=(QInt obj)
 {
 	int len = 127;
 	int ThisD = GetBit(this->data[0], 31);
@@ -369,7 +360,7 @@ bool QInt::operator>=(const QInt & obj)
 	return true;
 }
 
-QInt QInt::operator=(const QInt &obj)
+QInt QInt::operator=(QInt obj)
 {
 	string a;
 	string temp = obj.GetDataBin();
@@ -377,7 +368,7 @@ QInt QInt::operator=(const QInt &obj)
 	return*this;
 }
 
-QInt & operator&(const QInt & obj, const QInt & Kobj)
+QInt & operator&(QInt obj, QInt Kobj)
 {
 	QInt temp;
 	string result;
@@ -396,7 +387,7 @@ QInt & operator&(const QInt & obj, const QInt & Kobj)
 	return temp;
 }
 
-QInt & operator|(const QInt & obj, const QInt & Kobj)
+QInt & operator|(QInt obj, QInt Kobj)
 {
 	QInt temp;
 	string result;
@@ -415,7 +406,7 @@ QInt & operator|(const QInt & obj, const QInt & Kobj)
 	return temp;
 }
 
-QInt & operator^(const QInt & obj, const QInt & Kobj)
+QInt & operator^(QInt obj, QInt Kobj)
 {
 	QInt temp;
 	string result;
@@ -434,7 +425,7 @@ QInt & operator^(const QInt & obj, const QInt & Kobj)
 	return temp;
 }
 
-QInt & operator~(const QInt & obj)
+QInt & operator~(QInt obj)
 {
 
 	QInt temp;

@@ -18,7 +18,7 @@ public:
 	void SetDataHex(string strHex);
 
 	// Lấy data dạng Bin
-	string GetDataBin() const;
+	string GetDataBin();
 
 	// Nhập số QInt dạng thập phân
 	void ScanQInt();
@@ -42,17 +42,17 @@ public:
 	friend QInt operator * (QInt a, QInt b);
 	friend QInt operator / (QInt a, QInt b);
 
-	bool operator < (const QInt& obj);
-	bool operator > (const QInt& obj);
-	bool operator == (const QInt& obj);
-	bool operator <= (const QInt& obj);
-	bool operator >= (const QInt& obj);
-	QInt operator = (const QInt &obj);
+	bool operator < (QInt obj);
+	bool operator > (QInt obj);
+	bool operator == (QInt obj);
+	bool operator <= (QInt obj);
+	bool operator >= (QInt obj);
+	QInt operator = (QInt obj);
 
-	friend QInt& operator & (const QInt& obj, const QInt& Kobj);
-	friend QInt& operator | (const QInt& obj, const QInt& Kobj);
-	friend QInt& operator ^ (const QInt& obj, const QInt& Kobj);
-	friend QInt &operator ~ (const QInt& obj);
+	friend QInt& operator & (QInt obj, QInt Kobj);
+	friend QInt& operator | (QInt obj, QInt Kobj);
+	friend QInt& operator ^ (QInt obj, QInt Kobj);
+	friend QInt &operator ~ (QInt obj);
 
 	friend QInt operator << (QInt obj,int SoBitDich);
 	friend QInt operator >> (QInt obj,int soBitDich);
