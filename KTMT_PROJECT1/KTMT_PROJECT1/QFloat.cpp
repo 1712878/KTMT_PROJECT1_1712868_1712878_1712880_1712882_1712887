@@ -43,27 +43,32 @@ void QFloat::SetDataBin(string strBin)
 
 string QFloat::BinToDec(string bit)
 {
+	char c = bit[0];
 	SetDataBin(bit);
-	string result = "";
 	string temp = BinToDecInt(bit.substr(1, 15));
-	temp.insert(temp.length(), 1, '.');
+	int Exponent = stoi(temp)-16383;
+	bit.erase(0, 16);
+	bit.insert(0, 1, '1');
+	string result =  BinToDecInt(bit.substr(0, Exponent+1));
+	result.insert(result.length(), 1, '.');
 
 	string str;
-	for (int i = 16; i < 128; i++) {
+	string thapphan;
+	for (int i = Exponent+1; i < bit.length(); i++) {
 		if (bit[i] == '1')
 		{
-			str = NegativePowTwo(i - 15);
+			str = NegativePowTwo(i - Exponent);
 			str.erase(0, 2);
-			result.insert(result.length(), str.length() - result.length(), '0');
-			result = AddTwoIntString(result, str);
+			thapphan.insert(thapphan.length(), str.length() - thapphan.length(), '0');
+			thapphan = AddTwoIntString(thapphan, str);
 		}
 	}
-	temp.insert(temp.size(), result);
-	if (bit[0] == '1')
+	result.insert(result.size(), thapphan);
+	if (c == '1')
 	{
 		temp.insert(0, 1, '-');
 	}
-	return temp;
+	return result;
 }
 
 string QFloat::DecToBin(string str) 
