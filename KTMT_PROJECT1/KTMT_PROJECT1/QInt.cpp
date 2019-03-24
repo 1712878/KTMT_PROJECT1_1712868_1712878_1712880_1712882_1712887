@@ -78,17 +78,8 @@ void QInt::PrintQIntBin()
 void QInt::PrintQIntHex()
 {
 	string temp = this->BinToHex(this->GetDataBin());
-	int pos;
-	if (temp[0] == '-')
-	{
-		pos = temp.find_first_not_of('0',1);
-		temp.erase(1, pos-1);
-	}
-	else
-	{
-		pos = temp.find_first_not_of('0');
-		temp.erase(0, pos);
-	}
+	int pos= pos = temp.find_first_not_of('0');
+	temp.erase(0, pos);
 	cout << temp;
 }
 
@@ -114,7 +105,7 @@ string QInt::BinToDec(string bit)
 	if (bit[0] == '1')
 	{
 		minus = true;
-		NotSign(bit);
+		TwoComplement(bit);
 	}
 	bit.erase(bit.begin());
 	int len = bit.length();
@@ -548,4 +539,3 @@ QInt QInt::ror(int SoBitQuay)
 	delete[] BitChuyenRa;
 	return des;
 }
-

@@ -163,19 +163,13 @@ string AddBitZero(string &bin)
 		bin.insert(0, 128 - len, '0');
 	return bin;
 }
-// Chuyển chuỗi str về dạng không dấu
-string NotSign(string &str)
-{
-	int pos = str.find_last_of('1');
-	for (int i = 0; i < pos; i++)
-		NotBit(str[i]);
-	return str;
-}
 // Chuyển chuỗi str về dạng bù 2
 string TwoComplement(string &str)
 {
 	AddBitZero(str);
-	NotSign(str);
+	int pos = str.find_last_of('1');
+	for (int i = 0; i < pos; i++)
+		NotBit(str[i]);
 	return str;
 }
 // Chuyển 4bits dạng Bin chuỗi str thành dạng Hex

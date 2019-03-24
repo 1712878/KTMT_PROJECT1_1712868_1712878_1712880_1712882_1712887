@@ -3,8 +3,6 @@
 
 #include "Bit.h"
 
-string DivideStringForTwo(string str);
-string NegativePowTwo(int exp);
 class QInt
 {
 private:

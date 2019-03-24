@@ -26,8 +26,6 @@ string NegativePowTwo(int exp);
 char NotBit(char &bit);
 // Nếu chuỗi bin chưa đủ 128 bit, thêm các bit 0 vào cho đủ
 string AddBitZero(string &bin);
-// Chuyển chuỗi str về dạng không dấu
-string NotSign(string &str);
 // Chuyển chuỗi str về dạng bù 2
 string TwoComplement(string &str);
 // Chuyển 4bits dạng Bin chuỗi str thành dạng Hex

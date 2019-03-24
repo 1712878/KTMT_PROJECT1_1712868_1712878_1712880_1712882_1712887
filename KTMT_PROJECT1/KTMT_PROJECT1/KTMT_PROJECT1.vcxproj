@@ -118,11 +118,13 @@
     <ClCompile Include="Bit.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Process.cpp" />
+    <ClCompile Include="QFloat.cpp" />
     <ClCompile Include="QInt.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bit.h" />
     <ClInclude Include="Process.h" />
+    <ClInclude Include="QFloat.h" />
     <ClInclude Include="QInt.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
