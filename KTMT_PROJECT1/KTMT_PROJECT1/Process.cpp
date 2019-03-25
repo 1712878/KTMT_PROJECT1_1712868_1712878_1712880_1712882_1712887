@@ -1,4 +1,6 @@
 ﻿#include "Process.h"
+#include<sstream>
+#include<string>
 
 // "123456" + "789" = "124245"
 string AddTwoIntString(string num1, string num2)
@@ -347,7 +349,7 @@ string CalculateBin(string str1, string str2, string Operator)
 	{
 		des = obj1.rol(stoi(str2));
 	}
-	return des.GetDataBin();
+	return des.GetDataBit();
 }
 
 string CalculateHex(string str1, string str2, string Operator)
@@ -415,7 +417,16 @@ string ConvertFloatB1ToB2(string str, int B1, int B2)
 	if (B1 == 10 & B2 == 2)
 		return flag.DecToBin(str);
 }
-
+int Count(string str)
+{
+	int result=0, len = str.length();
+	for (int i = 0; i < len; i++)
+	{
+		if (str[i] == ' ')
+			result++;
+	}
+	return result;
+}
 void FileProcess(ifstream& FileIn, ofstream& FileOut, int type)
 {
 	if (!FileIn.is_open())
@@ -426,25 +437,26 @@ void FileProcess(ifstream& FileIn, ofstream& FileOut, int type)
 	}
 	if (type == 1)
 	{
-		string str1, str2, Operator;
-		int b1, b2;
+		int B1, B2;
+		string str1,Operator,str2;
 		while (!FileIn.eof())
 		{
-			FileIn >> b1;
-			int pos = FileIn.tellg();
-			FileIn >> b2;
-			if (b2 == 2 || b2 == 16 || b2 == 10)
+			string s;
+			getline(FileIn, s);
+			stringstream ss(s);
+			if (Count(s) == 2)
 			{
-				FileIn >> str1;
-				FileOut << ConvertB1ToB2(str1, b1, b2) << "\n";
+				ss >> B1 >> B2;
+				ss >> str1;
+				FileOut << ConvertB1ToB2(str1, B1, B2) << "\n";
 			}
 			else
 			{
-				FileIn.seekg(pos);
-				FileIn >> str1;
-				FileIn >> Operator;
-				FileIn >> str2;
-				FileOut << Calculate(str1, str2, b1, Operator) << "\n";
+				ss >> B1;
+				ss >> str1;
+				ss >> Operator;
+				ss >> str2;
+				FileOut << Calculate(str1, str2, B1, Operator) << "\n";
 			}
 		}
 	}
@@ -454,9 +466,11 @@ void FileProcess(ifstream& FileIn, ofstream& FileOut, int type)
 		string str;
 		while (!FileIn.eof())
 		{
-			FileIn >> b1;
-			FileIn >> b2;
-			FileIn >> str;
+			getline(FileIn, str);
+			stringstream ss(str);
+			ss >> b1;
+			ss >> b2;
+			ss >> str;
 			FileOut << ConvertFloatB1ToB2(str, b1, b2) << "\n";
 		}
 	}
@@ -465,3 +479,52 @@ void FileProcess(ifstream& FileIn, ofstream& FileOut, int type)
 		cout << "\nType error!\n";
 	}
 }
+//void FileProcess(ifstream& FileIn, ofstream& FileOut, int type)
+//{
+//	if (!FileIn.is_open())
+//	{
+//		cout << "Khong the mo file input!" << endl;
+//		system("pause");
+//		return;
+//	}
+//	if (type == 1)
+//	{
+//		string str1, str2, Operator;
+//		int b1, b2;
+//		while (!FileIn.eof())
+//		{
+//			FileIn >> b1;
+//			int pos = FileIn.tellg();
+//			FileIn >> b2;
+//			if (b2 == 2 || b2 == 16 || b2 == 10)
+//			{
+//				FileIn >> str1;
+//				FileOut << ConvertB1ToB2(str1, b1, b2) << "\n";
+//			}
+//			else
+//			{
+//				FileIn.seekg(pos);
+//				FileIn >> str1;
+//				FileIn >> Operator;
+//				FileIn >> str2;
+//				FileOut << Calculate(str1, str2, b1, Operator) << "\n";
+//			}
+//		}
+//	}
+//	else if (type == 2)
+//	{
+//		int b1, b2;
+//		string str;
+//		while (!FileIn.eof())
+//		{
+//			FileIn >> b1;
+//			FileIn >> b2;
+//			FileIn >> str;
+//			FileOut << ConvertFloatB1ToB2(str, b1, b2) << "\n";
+//		}
+//	}
+//	else
+//	{
+//		cout << "\nType error!\n";
+//	}
+//}

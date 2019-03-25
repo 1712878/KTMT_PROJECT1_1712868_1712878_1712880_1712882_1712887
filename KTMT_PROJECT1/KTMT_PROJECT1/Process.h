@@ -51,5 +51,6 @@ string Calculate(string str1, string str2, int Base, string Operator);
 string ConvertFloatB1ToB2(string str, int B1, int B2);
 // Xử lí file
 void FileProcess(ifstream& FileIn, ofstream& FileOut, int type);
+
 #endif // !__PROCESS_H__
 
