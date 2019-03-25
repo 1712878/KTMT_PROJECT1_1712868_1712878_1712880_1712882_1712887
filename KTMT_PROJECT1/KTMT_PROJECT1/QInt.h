@@ -17,8 +17,14 @@ public:
 	// Chuyển một chuỗi Hex -> vào mảng a[4]
 	void SetDataHex(string strHex);
 
-	// Lấy data dạng Bin
+	// Lấy data dạng Bin đầy đủ
 	string GetDataBin();
+	// Lấy data dạng Bin
+	string GetDataBit();
+	// Lấy data dạng Dec
+	string GetDataDec();
+	// Lấy data dạng Hex
+	string GetDataHex();
 
 	// Nhập số QInt dạng thập phân
 	void ScanQInt();

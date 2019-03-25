@@ -32,14 +32,43 @@ void QInt::SetDataHex(string strHex)
 	string bin = this->HexToBin(strHex);
 	this->SetDataBin(bin);
 }
-
-// Lấy giá trị QInt dạng Bin
+string FixData(string &str)
+{
+	int pos = str.find_first_not_of("0");
+	if (pos == -1)
+		str = "0";
+	else
+		str.erase(0, pos);
+	return str;
+}
+// Lấy giá trị QInt dạng Bin đầy đủ
 string QInt::GetDataBin()
 {
 	string result;
 	result.resize(128);
 	for (int i = 0; i < 128; i++)
 		result[i] = (GetBit(this->data[i / 32], 31 - i % 32) + '0');
+	return result;
+}
+// Lấy giá trị QInt dạng Bin đầy đủ
+string QInt::GetDataBit()
+{
+	string result = this->GetDataBin();
+	FixData(result);
+	return result;
+}
+// Lấy data QInt dạng Dec
+string QInt::GetDataDec()
+{
+	string result= this->BinToDec(this->GetDataBit());
+	FixData(result);
+	return result;
+}
+// Lấy data QInt dạng Dec
+string QInt::GetDataHex()
+{
+	string result = this->BinToHex(this->GetDataBit());
+	FixData(result);
 	return result;
 }
 
@@ -54,24 +83,17 @@ void QInt::ScanQInt()
 // In QInt dạng thập phân
 void QInt::PrintQInt()
 {
-	string temp = this->GetDataBin();
-	cout << this->BinToDec(temp);
+	cout << this->GetDataDec();
 }
 // In QInt dạng Bin
 void QInt::PrintQIntBin()
 {
-	string temp = this->GetDataBin();
-	int pos = temp.find_first_not_of('0');
-	temp.erase(0, pos);
-	cout << temp;
+	cout << this->GetDataBit();
 }
 // In QInt dạng Hex
 void QInt::PrintQIntHex()
 {
-	string temp = this->BinToHex(this->GetDataBin());
-	int pos= pos = temp.find_first_not_of('0');
-	temp.erase(0, pos);
-	cout << temp;
+	cout << this->GetDataHex();
 }
 
 string QInt::DecToBin(string str)
@@ -90,6 +112,7 @@ string QInt::DecToBin(string str)
 }
 string QInt::BinToDec(string bit)
 {
+	
 	AddBitZero(bit,128);
 	string result = "";
 	bool minus = false;
