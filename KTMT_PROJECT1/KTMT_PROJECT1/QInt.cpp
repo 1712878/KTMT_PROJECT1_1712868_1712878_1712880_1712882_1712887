@@ -32,15 +32,6 @@ void QInt::SetDataHex(string strHex)
 	string bin = this->HexToBin(strHex);
 	this->SetDataBin(bin);
 }
-string FixData(string &str)
-{
-	int pos = str.find_first_not_of("0");
-	if (pos == -1)
-		str = "0";
-	else
-		str.erase(0, pos);
-	return str;
-}
 // Lấy giá trị QInt dạng Bin đầy đủ
 string QInt::GetDataBin()
 {

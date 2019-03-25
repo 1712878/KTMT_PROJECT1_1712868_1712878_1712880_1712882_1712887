@@ -37,6 +37,8 @@ char ConvertBinToHex(string str);
 string ConvertHexToBin(char c);
 string ConvertIntPartToBin(string str);
 string ConvertDecPartToBin(string str);
+// Loại bỏ số '0'
+string FixData(string &str);
 // Chuyển từ dạng B1 sang B2
 string ConvertB1ToB2(string str, int B1, int B2);
 // Tính toán số decimal

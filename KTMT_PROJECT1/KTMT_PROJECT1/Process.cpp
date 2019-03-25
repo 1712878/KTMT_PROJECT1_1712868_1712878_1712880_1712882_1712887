@@ -250,22 +250,34 @@ string ConvertDecPartToBin(string str)
 		result[125] = '1';
 	return string(result);
 }
+// Loại bỏ số '0'
+string FixData(string &str)
+{
+	int pos = str.find_first_not_of("0");
+	if (pos == -1)
+		str = "0";
+	else
+		str.erase(0, pos);
+	return str;
+}
 
 string ConvertB1ToB2(string str, int B1, int B2)
 {
+	string result;
 	QInt flag;
 	if (B1 == 2 & B2 == 10)
-		return flag.BinToDec(str);
-	if (B1 == 2 & B2 == 16)
-		return flag.BinToHex(str);
-	if (B1 == 10 & B2 == 16)
-		return flag.DecToHex(str);
-	if (B1 == 10 & B2 == 2)
-		return flag.DecToBin(str);
-	if (B1 == 16 & B2 == 2)
-		return flag.HexToBin(str);
-	if (B1 == 16 & B2 == 10)
-		return flag.HexToDec(str);
+		result = flag.BinToDec(str);
+	else if (B1 == 2 & B2 == 16)
+		result = flag.BinToHex(str);
+	else if (B1 == 10 & B2 == 16)
+		result = flag.DecToHex(str);
+	else if (B1 == 10 & B2 == 2)
+		result = flag.DecToBin(str);
+	else if (B1 == 16 & B2 == 2)
+		result = flag.HexToBin(str);
+	else if (B1 == 16 & B2 == 10)
+		result = flag.HexToDec(str);
+	return FixData(result);
 }
 
 string CalculateDec(string str1, string str2, string Operator)
