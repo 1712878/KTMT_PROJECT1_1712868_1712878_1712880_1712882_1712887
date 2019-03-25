@@ -43,22 +43,6 @@ string QInt::GetDataBin()
 	return result;
 }
 
-string QInt::GetDataDec()
-{
-	QInt flag;
-	string str = this->GetDataBin();
-	string des = flag.BinToDec(str);
-	return des;
-}
-
-string QInt::GetDataHex()
-{
-	QInt flag;
-	string str = this->GetDataBin();
-	string des = flag.BinToHex(str);
-	return des;
-}
-
 // Nhập số QInt dạng thập phân
 void QInt::ScanQInt()
 {

@@ -3,7 +3,6 @@
 
 #include "Bit.h"
 #include "Process.h"
-#include <fstream>
 
 // "123456" + "789" = "124245"
 string AddTwoIntString(string num1, string num2);
@@ -35,19 +34,5 @@ char ConvertBinToHex(string str);
 string ConvertHexToBin(char c);
 string ConvertIntPartToBin(string str);
 string ConvertDecPartToBin(string str);
-// Chuyển từ dạng B1 sang B2
-string ConvertB1ToB2(string str, int B1, int B2);
-// Tính toán số decimal
-string CalculateDec(string str1, string str2, string Operator);
-// Tính toán số binary
-string CalculateBin(string str1, string str2, string Operator);
-// Tính toán số hexadecimal
-string CalculateHex(string str1, string str2, string Operator);
-// Tính toán 
-string Calculate(string str1, string str2, int Base, string Operator);
-// Chuyển số QFloat từ dạng B1 sang B2
-string ConvertFloatB1ToB2(string str, int B1, int B2);
-// Xử lí file
-void FileProcess(ifstream& FileIn, ofstream& FileOut, int type);
 #endif // !__PROCESS_H__
 
