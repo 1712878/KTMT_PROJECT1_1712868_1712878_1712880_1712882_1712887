@@ -52,7 +52,7 @@ string Calculate(string str1, string str2, int Base, string Operator);
 // Chuyển số QFloat từ dạng B1 sang B2
 string ConvertFloatB1ToB2(string str, int B1, int B2);
 // Xử lí file
-void FileProcess(ifstream& FileIn, ofstream& FileOut, int type);
+void FileProcess(ifstream& FileIn, ofstream& FileOut, char type);
 
 #endif // !__PROCESS_H__
 

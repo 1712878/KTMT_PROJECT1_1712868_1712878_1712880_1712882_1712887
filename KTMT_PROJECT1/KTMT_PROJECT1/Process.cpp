@@ -475,7 +475,7 @@ int Count(string str)
 	}
 	return result;
 }
-void FileProcess(ifstream& FileIn, ofstream& FileOut, int type)
+void FileProcess(ifstream& FileIn, ofstream& FileOut, char type)
 {
 	if (!FileIn.is_open())
 	{
@@ -483,7 +483,7 @@ void FileProcess(ifstream& FileIn, ofstream& FileOut, int type)
 		system("pause");
 		return;
 	}
-	if (type == 1)
+	if (type == '1')
 	{
 		int B1, B2;
 		string str1,Operator,str2;
@@ -508,7 +508,7 @@ void FileProcess(ifstream& FileIn, ofstream& FileOut, int type)
 			}
 		}
 	}
-	else if (type == 2)
+	else if (type == '2')
 	{
 		int b1, b2;
 		string str;
