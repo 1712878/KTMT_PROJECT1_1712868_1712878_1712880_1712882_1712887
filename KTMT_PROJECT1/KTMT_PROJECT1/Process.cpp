@@ -319,6 +319,18 @@ string CalculateDec(string str1, string str2, string Operator)
 	{
 		des = obj1.rol(stoi(str2));
 	}
+	else if (Operator == "&")
+	{
+		des = obj1 & obj2;
+	}
+	else if (Operator == "|")
+	{
+		des = obj1 | obj2;
+	}
+	else if (Operator == "^")
+	{
+		des = obj1 ^ obj2;
+	}
 	return des.GetDataDec();
 }
 
@@ -361,6 +373,18 @@ string CalculateBin(string str1, string str2, string Operator)
 	{
 		des = obj1.rol(stoi(str2));
 	}
+	else if (Operator == "&")
+	{
+		des = obj1 & obj2;
+	}
+	else if (Operator == "|")
+	{
+		des = obj1 | obj2;
+	}
+	else if (Operator == "^")
+	{
+		des = obj1 ^ obj2;
+	}
 	return des.GetDataBit();
 }
 
@@ -402,6 +426,18 @@ string CalculateHex(string str1, string str2, string Operator)
 	else if (Operator == "rol")
 	{
 		des = obj1.rol(stoi(str2));
+	}
+	else if (Operator == "&")
+	{
+		des = obj1 & obj2;
+	}
+	else if (Operator == "|")
+	{
+		des = obj1 | obj2;
+	}
+	else if (Operator == "^")
+	{
+		des = obj1 ^ obj2;
 	}
 	return des.GetDataHex();
 }
@@ -491,52 +527,3 @@ void FileProcess(ifstream& FileIn, ofstream& FileOut, int type)
 		cout << "\nType error!\n";
 	}
 }
-//void FileProcess(ifstream& FileIn, ofstream& FileOut, int type)
-//{
-//	if (!FileIn.is_open())
-//	{
-//		cout << "Khong the mo file input!" << endl;
-//		system("pause");
-//		return;
-//	}
-//	if (type == 1)
-//	{
-//		string str1, str2, Operator;
-//		int b1, b2;
-//		while (!FileIn.eof())
-//		{
-//			FileIn >> b1;
-//			int pos = FileIn.tellg();
-//			FileIn >> b2;
-//			if (b2 == 2 || b2 == 16 || b2 == 10)
-//			{
-//				FileIn >> str1;
-//				FileOut << ConvertB1ToB2(str1, b1, b2) << "\n";
-//			}
-//			else
-//			{
-//				FileIn.seekg(pos);
-//				FileIn >> str1;
-//				FileIn >> Operator;
-//				FileIn >> str2;
-//				FileOut << Calculate(str1, str2, b1, Operator) << "\n";
-//			}
-//		}
-//	}
-//	else if (type == 2)
-//	{
-//		int b1, b2;
-//		string str;
-//		while (!FileIn.eof())
-//		{
-//			FileIn >> b1;
-//			FileIn >> b2;
-//			FileIn >> str;
-//			FileOut << ConvertFloatB1ToB2(str, b1, b2) << "\n";
-//		}
-//	}
-//	else
-//	{
-//		cout << "\nType error!\n";
-//	}
-//}
