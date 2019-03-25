@@ -1,4 +1,6 @@
 ﻿#include "Process.h"
+#include "QInt.h"
+#include "QFloat.h"
 
 // "123456" + "789" = "124245"
 string AddTwoIntString(string num1, string num2)
@@ -246,3 +248,219 @@ string ConvertDecPartToBin(string str)
 		result[125] = '1';
 	return string(result);
 }
+
+string ConvertB1ToB2(string str, int B1, int B2)
+{
+	QInt flag;
+	if (B1 == 2 & B2 == 10)
+		return flag.BinToDec(str);
+	if (B1 == 2 & B2 == 16)
+		return flag.BinToHex(str);
+	if (B1 == 10 & B2 == 16)
+		return flag.DecToHex(str);
+	if (B1 == 10 & B2 == 2)
+		return flag.DecToBin(str);
+	if (B1 == 16 & B2 == 2)
+		return flag.HexToBin(str);
+	if (B1 == 16 & B2 == 10)
+		return flag.HexToDec(str);
+}
+
+string CalculateDec(string str1, string str2, string Operator)
+{
+	QInt obj1;
+	QInt obj2;
+	QInt des;
+	obj1.SetDataDec(str1);
+	obj2.SetDataDec(str2);
+	if (Operator == "+")
+	{
+		des = obj1 + obj2;
+	}
+	else if (Operator == "-")
+	{
+		des = obj1 - obj2;
+	}
+	else if (Operator == "*")
+	{
+		des = obj1 * obj2;
+	}
+	else if (Operator == "/")
+	{
+		des = obj1 / obj2;
+	}
+	else if (Operator == ">>")
+	{
+		des = obj1 >> stoi(str2);
+	}
+	else if (Operator == "<<")
+	{
+		des = obj1 << stoi(str2);
+	}
+	else if (Operator == "ror")
+	{
+		des = obj1.ror(stoi(str2));
+	}
+	else if (Operator == "rol")
+	{
+		des = obj1.rol(stoi(str2));
+	}
+	return des.GetDataDec();
+}
+
+string CalculateBin(string str1, string str2, string Operator)
+{
+	QInt obj1;
+	QInt obj2;
+	QInt des;
+	obj1.SetDataBin(str1);
+	obj2.SetDataBin(str2);
+	if (Operator == "+")
+	{
+		des = obj1 + obj2;
+	}
+	else if (Operator == "-")
+	{
+		des = obj1 - obj2;
+	}
+	else if (Operator == "*")
+	{
+		des = obj1 * obj2;
+	}
+	else if (Operator == "/")
+	{
+		des = obj1 / obj2;
+	}
+	else if (Operator == ">>")
+	{
+		des = obj1 >> stoi(str2);
+	}
+	else if (Operator == "<<")
+	{
+		des = obj1 << stoi(str2);
+	}
+	else if (Operator == "ror")
+	{
+		des = obj1.ror(stoi(str2));
+	}
+	else if (Operator == "rol")
+	{
+		des = obj1.rol(stoi(str2));
+	}
+	return des.GetDataBin();
+}
+
+string CalculateHex(string str1, string str2, string Operator)
+{
+	QInt obj1;
+	QInt obj2;
+	QInt des;
+	obj1.SetDataHex(str1);
+	obj2.SetDataHex(str2);
+	if (Operator == "+")
+	{
+		des = obj1 + obj2;
+	}
+	else if (Operator == "-")
+	{
+		des = obj1 - obj2;
+	}
+	else if (Operator == "*")
+	{
+		des = obj1 * obj2;
+	}
+	else if (Operator == "/")
+	{
+		des = obj1 / obj2;
+	}
+	else if (Operator == ">>")
+	{
+		des = obj1 >> stoi(str2);
+	}
+	else if (Operator == "<<")
+	{
+		des = obj1 << stoi(str2);
+	}
+	else if (Operator == "ror")
+	{
+		des = obj1.ror(stoi(str2));
+	}
+	else if (Operator == "rol")
+	{
+		des = obj1.rol(stoi(str2));
+	}
+	return des.GetDataHex();
+}
+
+string Calculate(string str1, string str2, int Base, string Operator)
+{
+	string des;
+	switch (Base)
+	{
+	case 2:
+		des = CalculateBin(str1, str2, Operator); break;
+	case 10:
+		des = CalculateDec(str1, str2, Operator); break;
+	case 16:
+		des = CalculateHex(str1, str2, Operator); break;
+	}
+	return des;
+}
+
+string ConvertFloatB1ToB2(string str, int B1, int B2)
+{
+	QFloat flag;
+	if (B1 == 2 & B2 == 10)
+		return flag.BinToDec(str);
+	if (B1 == 10 & B2 == 2)
+		return flag.DecToBin(str);
+}
+
+void FileProcess(ifstream& FileIn, ofstream& FileOut, int type)
+{
+	if (type == 1)
+	{
+		string str1, str2, Operator;
+		int b1, b2;
+		while (!FileOut.eof())
+		{
+			FileIn >> b1;
+			int pos = FileIn.tellg();
+			FileIn >> b2;
+			if (b2 == 2 || b2 == 16 || b2 == 10)
+			{
+				FileIn >> str1;
+				FileOut << ConvertB1ToB2(str1, b1, b2) << "\n";
+			}
+			else
+			{
+				FileIn.seekg(pos);
+				FileIn >> str1;
+				FileIn >> Operator;
+				FileIn >> str2;
+				FileOut << Calculate(str1, str2, b1, Operator) << "\n";
+			}
+		}
+	}
+	else if (type == 2)
+	{
+		int b1, b2;
+		string str;
+		while (!FileOut.eof())
+		{
+			FileIn >> b1;
+			FileIn >> b2;
+			FileIn >> str;
+			FileOut << ConvertFloatB1ToB2(str, b1, b2) << "\n";
+		}
+	}
+	else
+	{
+		cout << "\nType error!\n";
+	}
+}
+
+
+
+
+

@@ -19,6 +19,10 @@ public:
 
 	// Lấy data dạng Bin
 	string GetDataBin();
+	// Lấy data dạng Dec
+	string GetDataDec();
+	// Lấy data dạng Hex;
+	string GetDataHex();
 
 	// Nhập số QInt dạng thập phân
 	void ScanQInt();
