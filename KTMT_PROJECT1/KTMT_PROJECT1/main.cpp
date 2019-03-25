@@ -1,4 +1,4 @@
-#include "Qint.h"
+#include "QInt.h"
 #include "QFloat.h"
 
 int main()

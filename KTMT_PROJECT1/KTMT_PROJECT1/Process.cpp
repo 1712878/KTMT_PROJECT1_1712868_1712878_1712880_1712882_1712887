@@ -221,6 +221,8 @@ string ConvertDecPartToBin(string str)
 	int len, pos, i = 0;
 	// xử lí số "0123" -> "123"
 	pos = str.find_first_not_of('0', 0);
+	if (pos == -1)
+		return "0";
 	str = str.substr(pos, str.length() - pos);
 
 	len = str.length();
