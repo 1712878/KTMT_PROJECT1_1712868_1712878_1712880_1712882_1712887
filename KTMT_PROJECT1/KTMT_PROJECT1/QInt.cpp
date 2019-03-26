@@ -388,7 +388,7 @@ QInt & operator&(QInt obj, QInt Kobj)
 	result.resize(128);
 	string a = obj.GetDataBin();
 	string b = Kobj.GetDataBin();
-	for (int i = 0; i < 127; i++)
+	for (int i = 0; i < 128; i++)
 	{
 		if (a[i] == '1'&&b[i] == '1')
 		{
@@ -407,7 +407,7 @@ QInt & operator|(QInt obj, QInt Kobj)
 	result.resize(128);
 	string a = obj.GetDataBin();
 	string b = Kobj.GetDataBin();
-	for (int i = 0; i < 127; i++)
+	for (int i = 0; i < 128; i++)
 	{
 		if (a[i] == '0'&&b[i] == '0')
 		{
@@ -426,7 +426,7 @@ QInt & operator^(QInt obj, QInt Kobj)
 	result.resize(128);
 	string a = obj.GetDataBin();
 	string b = Kobj.GetDataBin();
-	for (int i = 0; i < 127; i++)
+	for (int i = 0; i < 128; i++)
 	{
 		if (a[i] == b[i])
 		{
@@ -445,7 +445,7 @@ QInt & operator~(QInt obj)
 	string result;
 	result.resize(128);
 	string a = obj.GetDataBin();
-	for (int i = 0; i < 127; i++)
+	for (int i = 0; i < 128; i++)
 	{
 		if (a[i] == '1')
 		{
