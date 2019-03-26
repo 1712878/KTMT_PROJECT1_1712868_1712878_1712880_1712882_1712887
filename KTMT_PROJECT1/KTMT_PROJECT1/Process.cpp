@@ -570,15 +570,19 @@ string ConvertFloatB1ToB2(string str, int B1, int B2)
 	if (B1 == 10 & B2 == 2)
 		return flag.DecToBin(str);
 }
-int Count(string str)
+int countWords(string str)
 {
-	int result=0, len = str.length();
-	for (int i = 0; i < len; i++)
+	string sep = " ;:,\n\t";
+	int nWords = 0;
+	string::size_type lastPos = str.find_first_not_of(sep, 0);
+	string::size_type pos = str.find_first_of(sep, lastPos);
+	while (string::npos != pos || string::npos != lastPos)
 	{
-		if (str[i] == ' ')
-			result++;
+		nWords++;
+		lastPos = str.find_first_not_of(sep, pos);
+		pos = str.find_first_of(sep, lastPos);
 	}
-	return result;
+	return nWords;
 }
 void FileProcess(ifstream& FileIn, ofstream& FileOut, char type)
 {
@@ -597,7 +601,7 @@ void FileProcess(ifstream& FileIn, ofstream& FileOut, char type)
 			string s;
 			getline(FileIn, s);
 			stringstream ss(s);
-			if (Count(s) == 2)
+			if (countWords(s)==3)
 			{
 				ss >> B1 >> B2;
 				ss >> str1;
