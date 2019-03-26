@@ -216,15 +216,14 @@ QInt operator*(QInt a, QInt b)
 
 QInt operator/(QInt a, QInt b)
 {
-	QInt A, Q = a, M = b, tmp;
+	QInt A, Q = a, M = b;
 	int k = 128, storeBit, sign = 0, signNumQ, signNumM;
-	//  Xét dấu đầu vào 
+	 // Xét dấu đầu vào 
 	signNumQ = GetBit(Q.data[0], 31);
 	signNumM = GetBit(M.data[0], 31);
 	// Lấy bit đầu để kiểm tra dấu => lấy abs() & dấu của thương
 	if (signNumQ == 1 && signNumM == 0)
 	{
-
 		Q.TwoComplementQInt();
 		sign = 1;
 	}
@@ -244,7 +243,7 @@ QInt operator/(QInt a, QInt b)
 		sign = 0;
 	
 
-	if (Q < tmp)
+	if (GetBit(Q.data[0],31)==1)
 	{
 		for (int i = k - 1; i >= 0; i--)
 			SetBitOne(A.data[i / 32], 32 - i % 32 - 1);
@@ -261,7 +260,7 @@ QInt operator/(QInt a, QInt b)
 		Q = Q << 1;
 
 		A = A - M;
-		if (A < tmp )
+		if (GetBit(A.data[0],31) == 1 )
 		{
 			SetBitZero(Q.data[3], 0);
 			A = A + M;
