@@ -6,17 +6,7 @@ QFloat::QFloat()
 		this->BFloat[i] = 0;
 }
 
-string QFloat::BinToDecInt(string bit)
-{
-	string result = "";
-	int len = bit.length();
-	for (int i = len - 1; i >= 0; i--)
-	{
-		if (bit[i] == '1')
-			result = AddTwoIntString(result, PositivePowTwo(len - i - 1));
-	}
-	return result;
-}
+
 
 string QFloat::GetDataBin()
 {
@@ -49,12 +39,12 @@ string QFloat::BinToDec(string bit)
 	int Exponent = stoi(temp) - stoi(PositivePowTwo(14)) + 1;
 	bit.erase(0, 16);
 	bit.insert(0, 1, '1');
-	string result =  BinToDecInt(bit.substr(0, Exponent+1));
+	string result = BinToDecInt(bit.substr(0, Exponent + 1));
 	result.insert(result.length(), 1, '.');
 
 	string str;
 	string thapphan;
-	for (int i = Exponent+1; i < bit.length(); i++) {
+	for (int i = Exponent + 1; i < bit.length(); i++) {
 		if (bit[i] == '1')
 		{
 			str = NegativePowTwo(i - Exponent);

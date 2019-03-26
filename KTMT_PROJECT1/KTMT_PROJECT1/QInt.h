@@ -9,13 +9,14 @@ private:
 	int size = 4;
 	unsigned int data[4];
 public:
+	// Khởi tạo số QInt = 0
 	QInt();
 	// Chuyển một chuỗi Bin -> vào mảng a[4]
-	void SetDataBin(string strBin);
+	void SetDataBin(string str);
 	// Chuyển một chuỗi Dec -> vào mảng a[4]
-	void SetDataDec(string strDec);
+	void SetDataDec(string str);
 	// Chuyển một chuỗi Hex -> vào mảng a[4]
-	void SetDataHex(string strHex);
+	void SetDataHex(string str);
 
 	// Lấy data dạng Bin đầy đủ
 	string GetDataBin();
@@ -60,8 +61,8 @@ public:
 	friend QInt& operator ^ (QInt obj, QInt Kobj);
 	friend QInt &operator ~ (QInt obj);
 
-	friend QInt operator << (QInt obj,int NumOfBitMove);
-	friend QInt operator >> (QInt obj,int NumOfBitMove);
+	friend QInt operator << (QInt obj, int NumOfBitMove);
+	friend QInt operator >> (QInt obj, int NumOfBitMove);
 	QInt rol(int NumOfBitMove);
 	QInt ror(int NumOfBitMove);
 };

@@ -169,7 +169,7 @@ string AddBitZero(string &bin, int n)
 // Chuyển chuỗi str về dạng bù 2
 string TwoComplement(string &str, int n)
 {
-	AddBitZero(str,n);
+	AddBitZero(str, n);
 	int pos = str.find_last_of('1');
 	for (int i = 0; i < pos; i++)
 		NotBit(str[i]);
@@ -202,6 +202,17 @@ string ConvertHexToBin(char c)
 	return "0000";
 }
 
+string BinToDecInt(string bit)
+{
+	string result = "";
+	int len = bit.length();
+	for (int i = len - 1; i >= 0; i--)
+	{
+		if (bit[i] == '1')
+			result = AddTwoIntString(result, PositivePowTwo(len - i - 1));
+	}
+	return result;
+}
 string ConvertIntPartToBin(string str)
 {
 	string result;
@@ -558,6 +569,49 @@ string Calculate(string str1, string str2, int Base, string Operator)
 		des = CalculateDec(str1, str2, Operator); break;
 	case 16:
 		des = CalculateHex(str1, str2, Operator); break;
+	default:
+		des = "\nBase error!\n";
+	}
+	return des;
+}
+
+string NotDec(string str)
+{
+	str.erase(str.begin());
+	QInt des, des1;
+	des.SetDataDec(str);
+	des1 = ~des;
+	return des1.GetDataDec();
+}
+string NotBin(string str)
+{
+	str.erase(str.begin());
+	QInt des, des1;
+	des.SetDataBin(str);
+	des1 = ~des;
+	return des1.GetDataBit();
+}
+string NotHex(string str)
+{
+	str.erase(str.begin());
+	QInt des, des1;
+	des.SetDataHex(str);
+	des1 = ~des;
+	return des1.GetDataHex();
+}
+string Not(string str, int Base)
+{
+	string des;
+	switch (Base)
+	{
+	case 2:
+		des = NotBin(str); break;
+	case 10:
+		des = NotDec(str); break;
+	case 16:
+		des = NotHex(str); break;
+	default:
+		des = "\nBase error!\n";
 	}
 	return des;
 }
@@ -570,50 +624,53 @@ string ConvertFloatB1ToB2(string str, int B1, int B2)
 	if (B1 == 10 & B2 == 2)
 		return flag.DecToBin(str);
 }
-int countWords(string str)
+int Count(string str)
 {
-	string sep = " ;:,\n\t";
-	int nWords = 0;
-	string::size_type lastPos = str.find_first_not_of(sep, 0);
-	string::size_type pos = str.find_first_of(sep, lastPos);
-	while (string::npos != pos || string::npos != lastPos)
+	int result = 0, len = str.length();
+	for (int i = 0; i < len; i++)
 	{
-		nWords++;
-		lastPos = str.find_first_not_of(sep, pos);
-		pos = str.find_first_of(sep, lastPos);
+		if (str[i] == ' ')
+			result++;
 	}
-	return nWords;
+	return result;
 }
 void FileProcess(ifstream& FileIn, ofstream& FileOut, char type)
 {
+	cout << "\nProcessing . . .\n";
 	if (!FileIn.is_open())
 	{
-		cout << "Khong the mo file input!" << endl;
+		cout << "Can not open file input!" << endl;
 		system("pause");
 		return;
 	}
 	if (type == '1')
 	{
 		int B1, B2;
-		string str1,Operator,str2;
+		string str1, Operator, str2;
 		while (!FileIn.eof())
 		{
 			string s;
 			getline(FileIn, s);
 			stringstream ss(s);
-			if (countWords(s)==3)
+			if (Count(s) == 2)
 			{
 				ss >> B1 >> B2;
 				ss >> str1;
 				FileOut << ConvertB1ToB2(str1, B1, B2) << "\n";
 			}
-			else
+			else if (Count(s) == 3)
 			{
 				ss >> B1;
 				ss >> str1;
 				ss >> Operator;
 				ss >> str2;
 				FileOut << Calculate(str1, str2, B1, Operator) << "\n";
+			}
+			else if (Count(s) == 1)
+			{
+				ss >> B1;
+				ss >> str1;
+				FileOut << Not(str1, B1) << "\n";
 			}
 		}
 	}
@@ -634,5 +691,8 @@ void FileProcess(ifstream& FileIn, ofstream& FileOut, char type)
 	else
 	{
 		cout << "\nType error!\n";
+		system("pause");
+		return;
 	}
+	cout << "\nCompleted!\n";
 }

@@ -35,7 +35,11 @@ string TwoComplement(string &str, int n);
 char ConvertBinToHex(string str);
 // Chuyển 1 kí tự dạng Hex thành chuỗi string bin 4 kí tự
 string ConvertHexToBin(char c);
+// Chuyển phần nguyên số thực sang dạng decimal
+string BinToDecInt(string bit);
+// Chuyển phần nguyên số thực sang binary
 string ConvertIntPartToBin(string str);
+// Chuyển phần thập phân số thực sang binary
 string ConvertDecPartToBin(string str);
 // Loại bỏ số '0'
 string FixData(string &str);
@@ -49,6 +53,14 @@ string CalculateBin(string str1, string str2, string Operator);
 string CalculateHex(string str1, string str2, string Operator);
 // Tính toán 
 string Calculate(string str1, string str2, int Base, string Operator);
+// Not số decimal
+string NotDec(string str);
+// Not số binary
+string NotBin(string str);
+// Not số hexadecimal
+string NotHex(string str);
+// Not
+string Not(string str, int Base);
 // Chuyển số QFloat từ dạng B1 sang B2
 string ConvertFloatB1ToB2(string str, int B1, int B2);
 // Xử lí file

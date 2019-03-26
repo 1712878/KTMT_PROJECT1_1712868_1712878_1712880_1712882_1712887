@@ -8,28 +8,28 @@ QInt::QInt()
 		this->data[i] = 0;
 }
 // Lưu giá trị chuỗi Bin vào QInt
-void QInt::SetDataBin(string strBin)
+void QInt::SetDataBin(string str)
 {
 	for (int i = 0; i < this->size; i++)
 		this->data[i] = 0;
-	int len = strBin.length();
+	int len = str.length();
 	for (int i = 0; i < 128; i++)
 	{
 		len--;
-		if (len >= 0 && strBin[len] == '1')
+		if (len >= 0 && str[len] == '1')
 			SetBitOne(this->data[this->size - 1 - i / 32], i % 32);
 	}
 }
 // Lưu giá trị chuỗi Dec vào QInt
-void QInt::SetDataDec(string strDec)
+void QInt::SetDataDec(string str)
 {
-	string bin = this->DecToBin(strDec);
+	string bin = this->DecToBin(str);
 	this->SetDataBin(bin);
 }
 // Lưu giá trị chuỗi Hexa vào QInt
-void QInt::SetDataHex(string strHex)
+void QInt::SetDataHex(string str)
 {
-	string bin = this->HexToBin(strHex);
+	string bin = this->HexToBin(str);
 	this->SetDataBin(bin);
 }
 // Lấy giá trị QInt dạng Bin đầy đủ
@@ -51,7 +51,7 @@ string QInt::GetDataBit()
 // Lấy data QInt dạng Dec
 string QInt::GetDataDec()
 {
-	string result= this->BinToDec(this->GetDataBit());
+	string result = this->BinToDec(this->GetDataBit());
 	FixData(result);
 	return result;
 }
@@ -96,27 +96,27 @@ string QInt::DecToBin(string str)
 		minus = true;
 		str.erase(str.begin());
 	}
-	result = ConvertBigIntToBin(str,128);
+	result = ConvertBigIntToBin(str, 128);
 	if (minus)
-		TwoComplement(result,128);
+		TwoComplement(result, 128);
 	return result;
 }
 string QInt::BinToDec(string bit)
 {
-	
-	AddBitZero(bit,128);
+
+	AddBitZero(bit, 128);
 	string result = "";
 	bool minus = false;
 	if (bit[0] == '1')
 	{
 		minus = true;
-		TwoComplement(bit,128);
+		TwoComplement(bit, 128);
 	}
 	bit.erase(bit.begin());
 	int len = bit.length();
 	for (int i = len - 1; i >= 0; i--)
 	{
-		if(bit[i] == '1')
+		if (bit[i] == '1')
 			result = AddTwoIntString(result, PositivePowTwo(len - i - 1));
 	}
 	if (minus)
@@ -125,13 +125,13 @@ string QInt::BinToDec(string bit)
 }
 string QInt::BinToHex(string bit)
 {
-	AddBitZero(bit,128);
+	AddBitZero(bit, 128);
 	string result = "";
 	int len = bit.length();
 	string temp;
 	while (len > 0)
 	{
-		temp.append(bit,len - 4, 4);
+		temp.append(bit, len - 4, 4);
 		result.insert(0, 1, ConvertBinToHex(temp));
 		len -= 4;
 		temp = "";
@@ -150,7 +150,7 @@ string QInt::HexToBin(string str)
 {
 	string result;
 	int len = str.length();
-	for (int i = len-1; i >= 0; i--)
+	for (int i = len - 1; i >= 0; i--)
 		result.insert(0, ConvertHexToBin(str[i]));
 	return result;
 }
@@ -218,7 +218,7 @@ QInt operator/(QInt a, QInt b)
 {
 	QInt A, Q = a, M = b;
 	int k = 128, storeBit, sign = 0, signNumQ, signNumM;
-	 // Xét dấu đầu vào 
+	// Xét dấu đầu vào 
 	signNumQ = GetBit(Q.data[0], 31);
 	signNumM = GetBit(M.data[0], 31);
 	// Lấy bit đầu để kiểm tra dấu => lấy abs() & dấu của thương
@@ -241,14 +241,14 @@ QInt operator/(QInt a, QInt b)
 	}
 	else
 		sign = 0;
-	
 
-	if (GetBit(Q.data[0],31)==1)
+
+	if (GetBit(Q.data[0], 31) == 1)
 	{
 		for (int i = k - 1; i >= 0; i--)
 			SetBitOne(A.data[i / 32], 32 - i % 32 - 1);
 	}
-	
+
 	while (k > 0)
 	{
 		A = A << 1;
@@ -260,7 +260,7 @@ QInt operator/(QInt a, QInt b)
 		Q = Q << 1;
 
 		A = A - M;
-		if (GetBit(A.data[0],31) == 1 )
+		if (GetBit(A.data[0], 31) == 1)
 		{
 			SetBitZero(Q.data[3], 0);
 			A = A + M;
@@ -458,7 +458,7 @@ QInt & operator~(QInt obj)
 }
 
 //Dịch trái
-QInt operator<<(QInt obj,int NumOfBitMove)
+QInt operator<<(QInt obj, int NumOfBitMove)
 {
 	QInt des;
 	string str;
@@ -482,9 +482,9 @@ QInt operator>>(QInt obj, int NumOfBitMove)
 	string str;
 	char MSB = obj.GetDataBin().at(0);
 	str = obj.GetDataBin();
-	for (int i = str.size() - 1; i > NumOfBitMove-1; i--)
+	for (int i = str.size() - 1; i > NumOfBitMove - 1; i--)
 	{
-		str.at(i) = str.at(i-NumOfBitMove);
+		str.at(i) = str.at(i - NumOfBitMove);
 	}
 	for (int i = 0; i < NumOfBitMove; i++)
 	{
@@ -503,7 +503,7 @@ QInt QInt::rol(int NumOfBitMove)
 	str = this->GetDataBin();
 	for (int i = 0, j = NumOfBitMove; i < NumOfBitMove; i++)
 	{
-		BitOut[i] = str.at(j-1);
+		BitOut[i] = str.at(j - 1);
 		j--;
 	}
 	for (int i = 0; i < str.size() - NumOfBitMove; i++)
@@ -528,7 +528,7 @@ QInt QInt::ror(int NumOfBitMove)
 	str = this->GetDataBin();
 	for (int i = 0, j = str.size(); i < NumOfBitMove; i++)
 	{
-		BitOut[i] = str.at(j-1);
+		BitOut[i] = str.at(j - 1);
 		j--;
 	}
 	for (int i = str.size() - 1; i > NumOfBitMove - 1; i--)
