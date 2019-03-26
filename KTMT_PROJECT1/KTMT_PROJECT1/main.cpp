@@ -1,4 +1,3 @@
-#include "QInt.h"
 #include "QFloat.h"
 
 int main(int argc, char* argv[])

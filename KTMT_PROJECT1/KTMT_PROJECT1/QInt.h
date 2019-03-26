@@ -60,10 +60,10 @@ public:
 	friend QInt& operator ^ (QInt obj, QInt Kobj);
 	friend QInt &operator ~ (QInt obj);
 
-	friend QInt operator << (QInt obj,int SoBitDich);
-	friend QInt operator >> (QInt obj,int soBitDich);
-	QInt rol(int SoBitQuay);
-	QInt ror(int SoBitQuay);
+	friend QInt operator << (QInt obj,int NumOfBitMove);
+	friend QInt operator >> (QInt obj,int NumOfBitMove);
+	QInt rol(int NumOfBitMove);
+	QInt ror(int NumOfBitMove);
 };
 
 

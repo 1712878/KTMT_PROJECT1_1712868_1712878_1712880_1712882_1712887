@@ -331,6 +331,41 @@ string CalculateDec(string str1, string str2, string Operator)
 	{
 		des = obj1 ^ obj2;
 	}
+	else if (Operator == ">")
+	{
+		if (obj1 > obj2)
+			return "TRUE";
+		else
+			return "FALSE";
+	}
+	else if (Operator == "<")
+	{
+		if (obj1 < obj2)
+			return "TRUE";
+		else
+			return "FALSE";
+	}
+	else if (Operator == ">=")
+	{
+		if (obj1 >= obj2)
+			return "TRUE";
+		else
+			return "FALSE";
+	}
+	else if (Operator == "<=")
+	{
+		if (obj1 <= obj2)
+			return "TRUE";
+		else
+			return "FALSE";
+	}
+	else if (Operator == "==")
+	{
+		if (obj1 == obj2)
+			return "TRUE";
+		else
+			return "FALSE";
+	}
 	return des.GetDataDec();
 }
 
@@ -385,6 +420,41 @@ string CalculateBin(string str1, string str2, string Operator)
 	{
 		des = obj1 ^ obj2;
 	}
+	else if (Operator == ">")
+	{
+		if (obj1 > obj2)
+			return "TRUE";
+		else
+			return "FALSE";
+	}
+	else if (Operator == "<")
+	{
+		if (obj1 < obj2)
+			return "TRUE";
+		else
+			return "FALSE";
+	}
+	else if (Operator == ">=")
+	{
+		if (obj1 >= obj2)
+			return "TRUE";
+		else
+			return "FALSE";
+	}
+	else if (Operator == "<=")
+	{
+		if (obj1 <= obj2)
+			return "TRUE";
+		else
+			return "FALSE";
+	}
+	else if (Operator == "==")
+	{
+		if (obj1 == obj2)
+			return "TRUE";
+		else
+			return "FALSE";
+	}
 	return des.GetDataBit();
 }
 
@@ -438,6 +508,41 @@ string CalculateHex(string str1, string str2, string Operator)
 	else if (Operator == "^")
 	{
 		des = obj1 ^ obj2;
+	}
+	else if (Operator == ">")
+	{
+		if (obj1 > obj2)
+			return "TRUE";
+		else
+			return "FALSE";
+	}
+	else if (Operator == "<")
+	{
+		if (obj1 < obj2)
+			return "TRUE";
+		else
+			return "FALSE";
+	}
+	else if (Operator == ">=")
+	{
+		if (obj1 >= obj2)
+			return "TRUE";
+		else
+			return "FALSE";
+	}
+	else if (Operator == "<=")
+	{
+		if (obj1 <= obj2)
+			return "TRUE";
+		else
+			return "FALSE";
+	}
+	else if (Operator == "==")
+	{
+		if (obj1 == obj2)
+			return "TRUE";
+		else
+			return "FALSE";
 	}
 	return des.GetDataHex();
 }
